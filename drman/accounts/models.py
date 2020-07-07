@@ -9,14 +9,12 @@ class Customer(models.Model):
     phone = models.CharField(max_length=15,null=True)
     email = models.CharField(max_length=200,null=True)
     date_created = models.DateTimeField(auto_now_add=True,null=True)
-
     def __str__(self):
         return f'{self.name}'
 
 class Drone(models.Model):
 
     droneid = models.CharField(max_length=200,null=True)
-
     LOAN_STATUS = (
         ('m', 'Maintenance'),
         ('o', 'On loan'),
@@ -31,8 +29,10 @@ class Drone(models.Model):
         return self.droneid
 
 class Mission(models.Model):
-    #mission_id = 
+    mission_id = models.CharField(max_length=10,null=True)
     date_future = models.DateTimeField(auto_now_add=False,null=True)
+    drone = models.OneToOneField(Drone,null=True,on_delete=models.SET_NULL)
+    customer = models.OneToOneField(Customer,null=True,on_delete=models.SET_NULL)
     MISSION_TYPE = (
         ('1', 'Loiter'),
         ('2', 'Circumferance'),
@@ -49,3 +49,10 @@ class Mission(models.Model):
 
     def __str__(self):
         return self.mission_type
+
+class Location(models.Model):
+    location_id = models.CharField(max_length=20,null=True)
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
+    altitude = models.IntegerField(null=True)
+    drone = models.ForeignKey(Drone,null=True,on_delete=models.SET_NULL)
