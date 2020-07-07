@@ -3,3 +3,4 @@ Drone_FW/venv/
 drman/db.sqlite3
 drman/accounts/__pycache__/
 drman/drman/__pycache__/
+drman/accounts/migrations/
