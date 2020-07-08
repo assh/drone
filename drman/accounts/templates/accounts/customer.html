@@ -41,11 +41,11 @@
 		<div class="card card-body">
 			<form method="get">
 
-		    <button class="btn btn-primary" type="submit">Search</button>
-		  </form>
+				<button class="btn btn-primary" type="submit">Search</button>
+			</form>
 		</div>
 	</div>
-	
+
 </div>
 <br>
 
@@ -57,40 +57,40 @@
 			<a class="btn btn-danger  btn-sm btn-block" href="">Add New Customer</a>
 			<table class="table">
 				<thead class="thead-dark" style="text-align:center">
-				  <tr>
-					<th scope="col">Customer</th>
-					<th scope="col">Mission No.</th>
-					<th scope="col">Status</th>
-				  </tr>
+					<tr>
+						<th scope="col">Customer</th>
+						<th scope="col">Mission No.</th>
+						<th scope="col">Status</th>
+					</tr>
 				</thead>
 				<tbody>
 					{% for i in cust %}
 					<tr>
 						<td align="center">{{i.name}}</td>
 						{% for j in mission %}
-							{% if i.name == j.customer.name and forloop.first %}
-								<td align="center">{{j.mission_id}}</td>
-								
-								{% if j.drone.status == 'm' %}
-									<td align="center">Maintenance</td>
-								
-								{% endif%}
-								{% if j.drone.status == 'o' %}
-									<td align="center">On Loan</td>
-								{% endif%}
-								{% if j.drone.status == 'a' %}
-									<td align="center">Available</td>
-								{% endif%}
-								{% if j.drone.status == 'r' %}
-									<td align="center">Reserved</td>
-								{% endif%}
-							{% endif %}
+						{% if i.name == j.customer.name and forloop.first %}
+						<td align="center">{{j.mission_id}}</td>
+
+						{% if j.drone.status == 'm' %}
+						<td align="center">Maintenance</td>
+
+						{% endif%}
+						{% if j.drone.status == 'o' %}
+						<td align="center">On Loan</td>
+						{% endif%}
+						{% if j.drone.status == 'a' %}
+						<td align="center">Available</td>
+						{% endif%}
+						{% if j.drone.status == 'r' %}
+						<td align="center">Reserved</td>
+						{% endif%}
+						{% endif %}
 						{% endfor %}
 					</tr>
 					{% endfor %}
 				</tbody>
-			  </table>
+			</table>
 		</div>
 	</div>
 
-{% endblock %}
+	{% endblock %}

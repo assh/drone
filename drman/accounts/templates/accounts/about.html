@@ -30,11 +30,11 @@
 
 			<table class="table">
 				<thead class="thead-dark" style="text-align:center">
-				  <tr>
-					<th scope="col">Drone ID</th>
-					<th scope="col">Station</th>
-					<th scope="col">Status</th>
-				  </tr>
+					<tr>
+						<th scope="col">Drone ID</th>
+						<th scope="col">Station</th>
+						<th scope="col">Status</th>
+					</tr>
 				</thead>
 				<tbody>
 					{% for i in drones %}
@@ -42,26 +42,26 @@
 						<td align="center">{{i.droneid}}</td>
 						<td align="center">{{i.locale}}</td>
 						{% if i.status == 'm' %}
-							<td align="center">Maintenance</td>
+						<td align="center">Maintenance</td>
 						{% endif%}
 						{% if i.status == 'o' %}
-							<td align="center">On Loan</td>
+						<td align="center">On Loan</td>
 						{% endif%}
 						{% if i.status == 'a' %}
-							<td align="center">Available</td>
+						<td align="center">Available</td>
 						{% endif%}
 						{% if i.status == 'r' %}
-							<td align="center">Reserved</td>
+						<td align="center">Reserved</td>
 						{% endif%}
 					</tr>
 					{% endfor %}
 				</tbody>
-			  </table>
+			</table>
 
 
 		</div>
 	</div>
 
-{% endblock %}
+	{% endblock %}
 
-<!--prechange-->
+	<!--prechange-->
