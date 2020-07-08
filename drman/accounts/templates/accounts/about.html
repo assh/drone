@@ -8,16 +8,60 @@
 		<hr>
 		<div class="card card-body">
 			<a class="btn btn-danger  btn-sm btn-block" href="">Add Drone</a>
-			<table class="table table-sm">
-				<tr>
-					<th></th>
-					<th>Drone ID</th>
-                    <th>Service Station</th>
-                    <th>Status</th>
-				</tr>
+			<!--<table class="table table-sm">
+				<thead class="thead-dark">
+					<tr>
+						<th></th>
+						<th scope="col" >Drone ID</th>
+						<th>Service Station</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for i in drones %}
+					<tr>
+						<td align="right">{{i.droneid}}</td>
+						<td>{{i.locale}}</td>
+						<td>{{i.status}}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+			</table>-->
 
-			</table>
+			<table class="table">
+				<thead class="thead-dark" style="text-align:center">
+				  <tr>
+					<th scope="col">Drone ID</th>
+					<th scope="col">Station</th>
+					<th scope="col">Status</th>
+				  </tr>
+				</thead>
+				<tbody>
+					{% for i in drones %}
+					<tr>
+						<td align="center">{{i.droneid}}</td>
+						<td align="center">{{i.locale}}</td>
+						{% if i.status == 'm' %}
+							<td align="center">Maintenance</td>
+						{% endif%}
+						{% if i.status == 'o' %}
+							<td align="center">On Loan</td>
+						{% endif%}
+						{% if i.status == 'a' %}
+							<td align="center">Available</td>
+						{% endif%}
+						{% if i.status == 'r' %}
+							<td align="center">Reserved</td>
+						{% endif%}
+					</tr>
+					{% endfor %}
+				</tbody>
+			  </table>
+
+
 		</div>
 	</div>
 
 {% endblock %}
+
+<!--prechange-->
