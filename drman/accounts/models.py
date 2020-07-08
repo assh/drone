@@ -12,6 +12,14 @@ class Customer(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+class Location(models.Model):
+    location_id = models.CharField(max_length=20,null=True)
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
+    altitude = models.IntegerField(null=True)
+
+    def __str__(self):
+        return self.location_id
 
 
 class Drone(models.Model):
@@ -25,15 +33,17 @@ class Drone(models.Model):
     )
 
     status = models.CharField(max_length=1,choices=LOAN_STATUS,blank=True,default='m',null=True)
-    
+    locale = models.ForeignKey(Location,null=True,on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.droneid
+
 
 class Mission(models.Model):
     mission_id = models.CharField(max_length=10,null=True)
     date_future = models.DateTimeField(auto_now_add=False,null=True)
     drone = models.ForeignKey(Drone,null=True,on_delete=models.SET_NULL)
+    state = models.ForeignKey(Location,null=True,on_delete=models.SET_NULL)
     customer = models.ForeignKey(Customer,null=True,on_delete=models.SET_NULL)
     MISSION_TYPE = (
         ('1', 'Loiter'),
@@ -52,12 +62,3 @@ class Mission(models.Model):
     def __str__(self):
         return self.mission_id
 
-class Location(models.Model):
-    location_id = models.CharField(max_length=20,null=True)
-    latitude = models.FloatField(null=True)
-    longitude = models.FloatField(null=True)
-    altitude = models.IntegerField(null=True)
-    drone = models.ManyToManyField(Drone)
-
-    def __str__(self):
-        return self.location_id
