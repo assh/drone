@@ -10,4 +10,8 @@ def about(request):
     return render(request,'accounts/about.html',{'drones':dr})
 
 def customer(request):
-    return render(request,'accounts/customer.html')
+    somedict = {
+        'cust' : Customer.objects.all(),
+        'mission': Mission.objects.all()
+    }
+    return render(request,'accounts/customer.html',somedict)
