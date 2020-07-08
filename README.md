@@ -1,3 +1,3 @@
-# Drone Project
+# Drone Resource Management
 
-This Project contans the Django framework for customer management and the drones autonomous firmware.
+This Project contans the Django framework for customer management 
