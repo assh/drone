@@ -8,6 +8,8 @@
 <div class="row">
 	<div class="col-md">
 		<div class="card card-body">
+		<a class="btn btn-danger" href="">Add New Customer</a></div>
+		<div class="card card-body">
 			<h5>Customer:</h5>
 			<hr>
 			<a class="btn btn-outline-info  btn-sm btn-block" href="">Update Customer</a>
@@ -27,7 +29,7 @@
 
 	<div class="col-md">
 		<div class="card card-body">
-			<h5>Total Orders</h5>
+			<h5>Total Missions Ordered</h5>
 			<hr>
 			<h1 style="text-align: center;padding: 10px"></h1>
 		</div>
@@ -51,43 +53,20 @@
 
 <div class="row">
 	<div class="col">
-		<h5 class="text-center display-4">Customer Info</h5>
+		<h5 class="text-center display-4">Orders Info</h5>
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-danger  btn-sm btn-block" href="">Add New Customer</a>
+			
 			<table class="table">
 				<thead class="thead-dark" style="text-align:center">
 					<tr>
-						<th scope="col">Customer</th>
 						<th scope="col">Mission No.</th>
-						<th scope="col">Status</th>
+						<th scope="col">Mission Status</th>
+						<th scope="col">Drone Assigned</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for i in cust %}
-					<tr>
-						<td align="center">{{i.name}}</td>
-						{% for j in mission %}
-						{% if i.name == j.customer.name and forloop.first %}
-						<td align="center">{{j.mission_id}}</td>
-
-						{% if j.drone.status == 'm' %}
-						<td align="center">Maintenance</td>
-
-						{% endif%}
-						{% if j.drone.status == 'o' %}
-						<td align="center">On Loan</td>
-						{% endif%}
-						{% if j.drone.status == 'a' %}
-						<td align="center">Available</td>
-						{% endif%}
-						{% if j.drone.status == 'r' %}
-						<td align="center">Reserved</td>
-						{% endif%}
-						{% endif %}
-						{% endfor %}
-					</tr>
-					{% endfor %}
+					
 				</tbody>
 			</table>
 		</div>
