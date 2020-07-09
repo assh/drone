@@ -21,9 +21,9 @@ def about(request):
     return render(request, 'accounts/about.html', {'drones': dr})
 
 
-def customer(request):
-    somedict = {
-        'cust': Customer.objects.all(),
-        'mission': Mission.objects.all()
-    }
+def customer(request, pk):
+    customer = Customer.objects.get(id=pk)
+    mission = customer.mission_set.all()
+    total_mission = mission.count()
+    somedict = {'customer': customer, 'missions': mission,'total_mission':total_mission}
     return render(request, 'accounts/customer.html', somedict)
