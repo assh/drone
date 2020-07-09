@@ -12,13 +12,20 @@
 		<hr>
 		<div class="card card-body">
 			<a class="btn btn-danger  btn-sm btn-block" href="">Create Customer</a>
-			<table class="table table-sm">
-				<tr>
-					<th></th>
-					<th>Customer ID</th>
-					<th>Mission No.</th>
-				</tr>
-
+			<table class="table">
+				<thead class="thead-dark" style="text-align:center">
+					<tr>
+						<th scope="col">Customer</th>
+						<th scope="col">Mission</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for cust in customer %}
+					<tr>
+						<td align="center">{{cust.name}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
 			</table>
 		</div>
 	</div>
@@ -35,15 +42,27 @@
 					<a class="btn btn-info  btn-sm btn-block" href="">View All</a>
 				</div>
 			</div>
-			<table class="table table-sm">
-				<tr>
-					<th>Mission</th>
-					<th>Date Scheduled</th>
-					<th>Status</th>
-					<th>Update</th>
-					<th>Remove</th>
-				</tr>
-
+			<table class="table">
+				<thead class="thead-dark" style="text-align:center">
+					<tr>
+						<th>Mission</th>
+						<th>Date Scheduled</th>
+						<th>Status</th>
+						<th>Update</th>
+						<th>Remove</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for miss in mission %}
+					<tr>
+						<td align="center">{{miss.mission_id}}</td>
+						<td align="center">{{miss.date_future|date:"d/m/y H:i:s"}}</td>
+						<td align="center">{{miss.mission_status}}</td>
+						<td align="center"><button type="button" class="btn btn-info btn-sm" href="#">View</button></td>
+						<td align="center"><button type="button" class="btn btn-danger btn-sm" href="#">Delete</button></td>
+					</tr>
+					{% endfor %}
+				</tbody>
 			</table>
 		</div>
 	</div>

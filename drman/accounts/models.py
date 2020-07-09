@@ -65,5 +65,12 @@ class Mission(models.Model):
     mode_type = models.CharField(
         max_length=1, choices=INFO_TYPE, blank=True, default='1', null=True)
 
+    STATE_TYPE = (
+        ('Pending', 'Pending'),
+        ('Complete', 'Complete'),
+        ('Cancelled','Cancelled')
+    )
+    mission_status = models.CharField(max_length = 10,choices=STATE_TYPE,default = 'Pending',blank=True,null=True)
+
     def __str__(self):
         return self.mission_id
