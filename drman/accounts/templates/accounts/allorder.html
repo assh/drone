@@ -1,0 +1,86 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<div class="card card-body">
+
+    <table class="table">
+        <thead class="thead-dark" style="text-align:center">
+            <tr>
+                <th scope="col">Mission No.</th>
+                <th scope="col">Drone Station</th>
+                <th scope="col">Drone Assigned</th>
+                <th scope="col">Mission Type</th>
+                <th scope="col">Media Type</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Command</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for mission in missions %}
+            <tr>
+                <td align="center">{{mission.mission_id}}
+                <td align="center">{{mission.state}}
+                <td align="center">{{mission.drone}}
+
+                {% if mission.mission_type == '1' %}
+                    <td align="center">Loiter</td>
+                {% elif mission.mission_type == '2' %}
+                    <td align="center">Circumferance</td>
+                {% else %}
+                    <td align="center">Comprehensive</td>
+                {% endif %}
+
+                {% if mission.mode_type == '1' %}
+                    <td align="center">Photo</td>
+                {% else %}
+
+                <td align="center">Video</td>
+                {% endif %}
+                <td align="center">{{mission.date_future|date:"d/m/y H:i:s"}}
+                <td align="center">{{mission.mission_status}}
+
+                <td align="center">{{mission.customer.name}}
+                {% if mission.mission_status == 'Pending'%}
+                    <td align="center"><button type="button" class="btn btn-danger btn-sm" href="#"  data-toggle="modal" data-target="#staticBackdrop">Launch</button></td>
+                {% else %}
+                    <td align="center"><button type="button" class="btn btn-danger btn-sm" href="#" disabled>Launch</button></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Are you sure you want to <b>Launch</b>?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Please make sure you comply with local rules and regulations and take into account local weather conditions. <b>Failure to comply with these rules may result in significant financial and/or legal consequences.</b>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+
+<!--   test             <td align="center">{{mission.mission_id}}</td>
+                    <td align="center">{{mission.mission_status}}</td>
+                    <td align="center">{{mission.drone.droneid}}</td>-->
