@@ -37,3 +37,6 @@ def mission(request):
         'missions':mission,
     }
     return render(request,'accounts/allorder.html',context)
+
+def launch(request):
+    return render(request,'accounts/launch.html')
