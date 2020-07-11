@@ -44,3 +44,4 @@ def launch(request,pk):
         'mission':mission
     }
     return render(request,'accounts/launch.html',context)
+    #This is for the launch function
