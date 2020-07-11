@@ -23,9 +23,9 @@
         <tbody>
             {% for mission in missions %}
             <tr>
-                <td align="center">{{mission.mission_id}}
-                <td align="center">{{mission.state}}
-                <td align="center">{{mission.drone}}
+                <td align="center"><a href="{% url 'launch' mission.id %}">{{mission.mission_id}}</a></td>
+                <td align="center">{{mission.state}}</td>
+                <td align="center">{{mission.drone}}</td>
 
                 {% if mission.mission_type == '1' %}
                     <td align="center">Loiter</td>

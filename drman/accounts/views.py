@@ -38,5 +38,9 @@ def mission(request):
     }
     return render(request,'accounts/allorder.html',context)
 
-def launch(request):
-    return render(request,'accounts/launch.html')
+def launch(request,pk):
+    mission = Mission.objects.get(id=pk)
+    context = {
+        'mission':mission
+    }
+    return render(request,'accounts/launch.html',context)
