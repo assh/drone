@@ -1,0 +1,82 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container" >
+    <div class="row">
+    
+
+    <div class="card">
+        <div class="card-body">
+            <h2 class=" card text-light card-title text-center" id="headlaunch">Mission Details</h2>
+            <br>
+            <div class="row">
+                <div class="col-md mx-5 my-2">
+                    <h4>Mission ID:</h4>
+                </div>
+                <div class="col-md text-center">
+                    <h4>{{mission.mission_id}}</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md mx-5 my-2">
+                    <h4>Servicing Drone Station:</h4>
+                </div>
+                <div class="col-md text-center">
+                    <h4>{{mission.state}}</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md mx-5 my-2">
+                    <h4>Drone Assigned:</h4>
+                </div>
+                <div class="col-md text-center">
+                    <h4>{{mission.drone}}</h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md mx-5 my-2">
+                    <h4>Mission Type:</h4>
+                </div>
+                <div class="col-md text-center">
+                    {% if mission.mission_type == '1' %}
+                        <h4>Loiter</h4>
+                    {% elif mission.mission_type == '2' %}
+                        <h4>Circumferance</h4>
+                    {% else %}
+                        <h4>Comprehensive</h4>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md mx-5 my-2">
+                    <h4>Mission Status:</h4>
+                </div>
+                <div class="col-md text-center">
+                    <h4>{{mission.mission_status}}</h4>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md">
+                    <button type="button" class="btn btn-primary btn-lg btn-block">Update</button>
+                </div>
+                <div class="col-md">
+                    <button type="button" class="btn btn-danger btn-lg btn-block">Delete</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">MAP</h5>
+            <p class="card-text">This is were the map will be displayed............................................................................</p>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
