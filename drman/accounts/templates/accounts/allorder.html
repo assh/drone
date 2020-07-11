@@ -1,0 +1,63 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<div class="card card-body">
+
+    <table class="table">
+        <thead class="thead-dark" style="text-align:center">
+            <tr>
+                <th scope="col">Mission No.</th>
+                <th scope="col">Drone Station</th>
+                <th scope="col">Drone Assigned</th>
+                <th scope="col">Mission Type</th>
+                <th scope="col">Media Type</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Command</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for mission in missions %}
+            <tr>
+                <td align="center">{{mission.mission_id}}
+                <td align="center">{{mission.state}}
+                <td align="center">{{mission.drone}}
+
+                {% if mission.mission_type == '1' %}
+                    <td align="center">Loiter</td>
+                {% elif mission.mission_type == '2' %}
+                    <td align="center">Circumferance</td>
+                {% else %}
+                    <td align="center">Comprehensive</td>
+                {% endif %}
+
+                {% if mission.mode_type == '1' %}
+                    <td align="center">Photo</td>
+                {% else %}
+
+                <td align="center">Video</td>
+                {% endif %}
+                <td align="center">{{mission.date_future|date:"d/m/y H:i:s"}}
+                <td align="center">{{mission.mission_status}}
+
+                <td align="center">{{mission.customer.name}}
+                {% if mission.mission_status == 'Pending'%}
+                    <td align="center"><button type="button" class="btn btn-danger btn-sm" href="#">Launch</button></td>
+                {% else %}
+                    <td align="center"><button type="button" class="btn btn-danger btn-sm" href="#" disabled>Launch</button></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+<!--                <td align="center">{{mission.mission_id}}</td>
+                    <td align="center">{{mission.mission_status}}</td>
+                    <td align="center">{{mission.drone.droneid}}</td>-->
