@@ -58,3 +58,18 @@ def createMission(request):
         'form':form,
     }
     return render(request,'accounts/mission_form.html',context)
+
+def updateMission(request,pk):
+    
+    mission = Mission.objects.get(id=pk)
+    form = MissionForm(instance=mission)
+    if request.method == 'POST':
+        form = MissionForm(request.POST,instance=mission)
+        if form.is_valid():
+            form.save()
+            return redirect('all-mission')
+    context={
+        'form':form,
+
+    }
+    return render(request,'accounts/mission_form.html',context)
