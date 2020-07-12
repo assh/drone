@@ -3,6 +3,7 @@
 {% block content %}
 
 <form action="" method="POST">
+    {% csrf_token %}
     <input type="submit" name="submit">
 </form>
 
