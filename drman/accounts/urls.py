@@ -7,4 +7,5 @@ urlpatterns = [
     path('customer/<str:pk>/', views.customer,name='customer'),
     path('mission/',views.mission,name='all-mission'),
     path('launch/<str:pk>/',views.launch,name='launch'),
+    path('create_mission/', views.createMission,name='create-mission'),
 ]

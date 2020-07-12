@@ -45,3 +45,10 @@ def launch(request,pk):
     }
     return render(request,'accounts/launch.html',context)
     #This is for the launch function
+
+def createMission(request):
+
+    context={
+        
+    }
+    return render(request,'accounts/mission_form.html',context)
