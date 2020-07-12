@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import *
-
+from .forms import MissionForm
 
 def home(request):
     customer = Customer.objects.all()
@@ -48,7 +48,13 @@ def launch(request,pk):
 
 def createMission(request):
 
+    form = MissionForm()
+    if request.method == 'POST':
+        form = MissionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
     context={
-        
+        'form':form,
     }
     return render(request,'accounts/mission_form.html',context)
