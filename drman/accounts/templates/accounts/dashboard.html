@@ -53,7 +53,6 @@
 						<th>Date Scheduled</th>
 						<th>Status</th>
 						<th>Update</th>
-						<th>Remove</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -62,8 +61,7 @@
 						<td align="center">{{miss.mission_id}}</td>
 						<td align="center">{{miss.date_future|date:"d/m/y H:i:s"}}</td>
 						<td align="center">{{miss.mission_status}}</td>
-						<td align="center"><button type="button" class="btn btn-warning btn-sm" href="#">View</button></td>
-						<td align="center"><button type="button" class="btn btn-danger btn-sm" href="#">Delete</button></td>
+						<td align="center"><a class="btn btn-info btn-sm" href="{% url 'launch' miss.id %}">View</a></td>
 					</tr>
 					{% endfor %}
 				</tbody>
