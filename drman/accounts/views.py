@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
-from .forms import MissionForm
+from .forms import *
 
 
 def home(request):
@@ -97,11 +97,11 @@ def status(request):
     return render(request, 'accounts/status.html', context)
 
 
-def createMission(request):
+def createCustomer(request):
 
-    form = MissionForm()
+    form = CustomerForm()
     if request.method == 'POST':
-        form = MissionForm(request.POST)
+        form = CustomerForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
