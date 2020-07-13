@@ -95,3 +95,17 @@ def status(request):
         'mission_cancelled': Mission.objects.filter(mission_status="Cancelled").count(),
     }
     return render(request, 'accounts/status.html', context)
+
+
+def createMission(request):
+
+    form = MissionForm()
+    if request.method == 'POST':
+        form = MissionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/mission_form.html', context)

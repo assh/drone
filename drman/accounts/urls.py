@@ -9,5 +9,6 @@ urlpatterns = [
     path('mission/', views.mission, name='all-mission'),
     path('launch/<str:pk>/', views.launch, name='launch'),
     path('create_mission/', views.createMission, name='create-mission'),
+    path('create_customer/', views.createCustomer, name='create-customer'),
     path('update_mission/<str:pk>', views.updateMission, name='update-mission'),
 ]
