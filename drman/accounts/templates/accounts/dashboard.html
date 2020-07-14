@@ -2,16 +2,14 @@
 
 {% block content %}
 
-{%  include 'accounts/status.html' %}
 
-<br>
 
 <div class="row">
 	<div class="col-md-5">
-		<h5 class="text-center">CUSTOMERS</h5>
+		<h3 class="text-center">CUSTOMERS</h3>
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-success  btn-sm btn-block" href="">Create Customer</a>
+			<a class="btn btn-success  btn-sm btn-block" href="{% url 'create-customer' %}">Add New Customer</a>
 			<br>
 			<table class="table">
 				<thead class="thead-dark" style="text-align:center">
@@ -34,16 +32,20 @@
 	</div>
 
 	<div class="col-md-7">
-		<h5 class="text-center">LAST 5 ORDERS</h5>
+		<h3 class="text-center">LAST 5 ORDERS</h3>
 		<hr>
 		<div class="card card-body">
 			<div class="row">
 				<div class="col col-md">
-					<a class="btn btn-success  btn-sm btn-block" href="">Create Order</a>
+					<a class="btn btn-success  btn-sm btn-block" href="{% url 'create-mission' %}">Add New Mission</a>
 				</div>
 				<div class="col col-md">
-					<a class="btn btn-info  btn-sm btn-block" href="{% url 'all-mission' %}">View All</a>
+					<a class="btn btn-info  btn-sm btn-block" href="{% url 'all-mission' %}">View My Mission</a>
 				</div>
+				<div class="col col-md">
+					<a class="btn btn-info  btn-sm btn-block" href="{% url 'all-mission' %}">View All Mission</a>
+				</div>
+
 			</div>
 			<br>
 			<table class="table">
@@ -53,7 +55,6 @@
 						<th>Date Scheduled</th>
 						<th>Status</th>
 						<th>Update</th>
-						<th>Remove</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -62,8 +63,8 @@
 						<td align="center">{{miss.mission_id}}</td>
 						<td align="center">{{miss.date_future|date:"d/m/y H:i:s"}}</td>
 						<td align="center">{{miss.mission_status}}</td>
-						<td align="center"><button type="button" class="btn btn-warning btn-sm" href="#">View</button></td>
-						<td align="center"><button type="button" class="btn btn-danger btn-sm" href="#">Delete</button></td>
+						<td align="center"><a class="btn btn-info btn-sm" href="{% url 'launch' miss.id %}">View</a>
+						</td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -74,4 +75,3 @@
 </div>
 
 {% endblock %}
-© 2020 GitHub, Inc.
