@@ -11,4 +11,5 @@ urlpatterns = [
     path('create_mission/', views.createMission, name='create-mission'),
     path('create_customer/', views.createCustomer, name='create-customer'),
     path('update_mission/<str:pk>', views.updateMission, name='update-mission'),
+    path('update_customer/<str:pk>',views.updateCustomer,name='update-customer'),
 ]

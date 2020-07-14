@@ -106,6 +106,17 @@ def createCustomer(request):
             form.save()
             return redirect('/')
     context = {
-        'form': form,
-    }
+        'form': form, }
+    return render(request, 'accounts/mission_form.html', context)
+
+def updateCustomer(request, pk):
+
+    customer = Customer.objects.get(id=pk)
+    form = CustomerForm(instance=customer)
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form': form}
     return render(request, 'accounts/mission_form.html', context)
