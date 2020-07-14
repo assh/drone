@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 from .filters import MissionFilter
-
+from django.contrib.auth.forms import UserCreationForm
 
 def home(request):
     customer = Customer.objects.all()
@@ -110,6 +110,7 @@ def createCustomer(request):
         'form': form, }
     return render(request, 'accounts/mission_form.html', context)
 
+
 def updateCustomer(request, pk):
 
     customer = Customer.objects.get(id=pk)
@@ -121,3 +122,13 @@ def updateCustomer(request, pk):
             return redirect('/')
     context = {'form': form}
     return render(request, 'accounts/mission_form.html', context)
+
+
+def registerPage(request):
+    context = {}
+    return render(request, 'accounts/register.html', context)
+
+
+def loginPage(request):
+    context = {}
+    return render(request, 'accounts/login.html', context)
