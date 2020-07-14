@@ -36,8 +36,12 @@ def customer(request, pk):
 
 
 def mission(request):
+
     mission = Mission.objects.all()
+    myFilter = MissionFilter(request.GET, queryset=mission)
+    mission = myFilter.qs
     context = {
+        'myFilter': myFilter,
         'missions': mission,
     }
     return render(request, 'accounts/allorder.html', context)
@@ -109,6 +113,7 @@ def createCustomer(request):
     context = {
         'form': form, }
     return render(request, 'accounts/mission_form.html', context)
+
 
 def updateCustomer(request, pk):
 
