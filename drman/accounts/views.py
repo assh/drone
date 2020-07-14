@@ -125,7 +125,8 @@ def updateCustomer(request, pk):
 
 
 def registerPage(request):
-    context = {}
+    form = UserCreationForm()
+    context = {'form':form}
     return render(request, 'accounts/register.html', context)
 
 
