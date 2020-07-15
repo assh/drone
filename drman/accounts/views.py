@@ -4,7 +4,12 @@ from .models import *
 from .forms import *
 from .filters import MissionFilter
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
+
+@login_required(login_url='login')
 def home(request):
     customer = Customer.objects.all()
     mission = Mission.objects.all()
@@ -21,11 +26,13 @@ def home(request):
     return render(request, 'accounts/dashboard.html', context)
 
 
+@login_required(login_url='login')
 def about(request):
     dr = Drone.objects.all()
     return render(request, 'accounts/about.html', {'drones': dr})
 
 
+@login_required(login_url='login')
 def customer(request, pk):
     customer = Customer.objects.get(id=pk)
     mission = customer.mission_set.all()
@@ -35,6 +42,7 @@ def customer(request, pk):
     return render(request, 'accounts/customer.html', somedict)
 
 
+@login_required(login_url='login')
 def mission(request):
 
     mission = Mission.objects.all()
@@ -47,6 +55,7 @@ def mission(request):
     return render(request, 'accounts/allorder.html', context)
 
 
+@login_required(login_url='login')
 def launch(request, pk):
     mission = Mission.objects.get(id=pk)
     context = {
@@ -56,6 +65,7 @@ def launch(request, pk):
     # This is for the launch function
 
 
+@login_required(login_url='login')
 def createMission(request):
 
     form = MissionForm()
@@ -70,6 +80,7 @@ def createMission(request):
     return render(request, 'accounts/mission_form.html', context)
 
 
+@login_required(login_url='login')
 def updateMission(request, pk):
 
     mission = Mission.objects.get(id=pk)
@@ -86,6 +97,7 @@ def updateMission(request, pk):
     return render(request, 'accounts/mission_form.html', context)
 
 
+@login_required(login_url='login')
 def status(request):
     customer = Customer.objects.all()
     mission = Mission.objects.all()
@@ -102,6 +114,7 @@ def status(request):
     return render(request, 'accounts/status.html', context)
 
 
+@login_required(login_url='login')
 def createCustomer(request):
 
     form = CustomerForm()
@@ -112,9 +125,10 @@ def createCustomer(request):
             return redirect('/')
     context = {
         'form': form, }
-    return render(request, 'accounts/mission_form.html', context)
+    return render(request, 'accounts/customer_form.html', context)
 
 
+@login_required(login_url='login')
 def updateCustomer(request, pk):
 
     customer = Customer.objects.get(id=pk)
@@ -125,15 +139,43 @@ def updateCustomer(request, pk):
             form.save()
             return redirect('/')
     context = {'form': form}
-    return render(request, 'accounts/mission_form.html', context)
+    return render(request, 'accounts/customer_form.html', context)
 
 
 def registerPage(request):
-    form = UserCreationForm()
-    context = {'form':form}
-    return render(request, 'accounts/register.html', context)
+
+    if request.user.is_authenticated:
+        return redirect('main-home')
+    else:
+        form = CreateUser()
+        if request.method == 'POST':
+            form = CreateUser(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Account was created')
+                return redirect('login')
+        context = {'form': form}
+        return render(request, 'accounts/register.html', context)
 
 
 def loginPage(request):
-    context = {}
-    return render(request, 'accounts/login.html', context)
+    if request.user.is_authenticated:
+        return redirect('main-home')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('main-home')
+            else:
+                messages.info(request, 'Username or Password is incorrect')
+        context = {}
+        return render(request, 'accounts/login.html', context)
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('login')

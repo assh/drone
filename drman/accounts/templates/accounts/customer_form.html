@@ -1,0 +1,33 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% load crispy_forms_tags  %}
+{% block content %}
+
+<div class="container">
+    <div class="card card-body">
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6 mb-0">
+            {{form.name|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            {{form.email|as_crispy_field}}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6 mb-0">
+            {{form.phone|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            {{form.mobile|as_crispy_field}}
+        </div>
+    </div>
+    {{form.address|as_crispy_field}}
+    
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+</div>
+</div>
+
+{% endblock %}
