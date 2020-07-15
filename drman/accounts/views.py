@@ -125,7 +125,7 @@ def createCustomer(request):
             return redirect('/')
     context = {
         'form': form, }
-    return render(request, 'accounts/mission_form.html', context)
+    return render(request, 'accounts/customer_form.html', context)
 
 
 @login_required(login_url='login')
@@ -139,7 +139,7 @@ def updateCustomer(request, pk):
             form.save()
             return redirect('/')
     context = {'form': form}
-    return render(request, 'accounts/mission_form.html', context)
+    return render(request, 'accounts/customer_form.html', context)
 
 
 def registerPage(request):
