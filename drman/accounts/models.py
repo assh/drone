@@ -8,6 +8,8 @@ class Customer(models.Model):
     name = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=15, null=True)
     email = models.CharField(max_length=200, null=True)
+    mobile = models.CharField(max_length=15, null=True)
+    address = models.CharField(max_length=200,null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -68,9 +70,10 @@ class Mission(models.Model):
     STATE_TYPE = (
         ('Pending', 'Pending'),
         ('Complete', 'Complete'),
-        ('Cancelled','Cancelled')
+        ('Cancelled', 'Cancelled')
     )
-    mission_status = models.CharField(max_length = 10,choices=STATE_TYPE,default = 'Pending',blank=True,null=True)
+    mission_status = models.CharField(
+        max_length=10, choices=STATE_TYPE, default='Pending', blank=True, null=True)
 
     def __str__(self):
         return self.mission_id
