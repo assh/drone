@@ -45,7 +45,18 @@ class Drone(models.Model):
 
 
 class Mission(models.Model):
-    mission_id = models.CharField(max_length=10, null=True)
+
+    def incrementid():
+        no = Mission.objects.count()
+        np = f'{no:06}'
+        if no == None:
+            return 'M000001'
+        else:
+            no = no+1
+            np = f'M{no:06}'
+            return np
+
+    mission_id = models.CharField(max_length=10, null=True,default = incrementid,editable=False)
     date_future = models.DateTimeField(auto_now_add=False, null=True)
     drone = models.ForeignKey(Drone, null=True, on_delete=models.SET_NULL)
     state = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
@@ -74,6 +85,8 @@ class Mission(models.Model):
     )
     mission_status = models.CharField(
         max_length=10, choices=STATE_TYPE, default='Pending', blank=True, null=True)
+
+    
 
     def __str__(self):
         return self.mission_id
