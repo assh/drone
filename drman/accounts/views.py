@@ -6,15 +6,15 @@ from .filters import MissionFilter
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from .decorators import unauthenticated_user,allowed_user
+from django.contrib.auth.decorators import login_required,permission_required,user_passes_test
+from .decorators import unauthenticated_user
 
 
 @login_required(login_url='login')
 #@allowed_user(allowed=['admin'])
 def home(request):
     customer = Customer.objects.all()
-    mission = Mission.objects.all()
+    mission = Mission.objects.all().order_by('-mission_id')
     context = {
         'customer': customer,
         # 'mymission':mymission,
@@ -44,7 +44,11 @@ def customer(request, pk):
     return render(request, 'accounts/customer.html', somedict)
 
 
+def is_valid(user):
+    return user.groups.filter(name='Admin').exists()
+
 @login_required(login_url='login')
+@user_passes_test(is_valid,login_url='main-home')
 def mission(request):
 
     mission = Mission.objects.all()
@@ -177,3 +181,17 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+@login_required(login_url='login')
+def createDrone(request):
+
+    form = DroneForm()
+    if request.method == 'POST':
+        form = DroneForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/drone_form.html', context)

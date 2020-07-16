@@ -7,10 +7,10 @@
 		<h5 class="text-center display-4">Drone Info</h5>
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-danger  btn-sm btn-block" href="">Add Drone</a>
+			<a class="btn btn-danger  btn-sm btn-block" href="{% url 'create-drone' %}">Add Drone</a>
 <br>
 			<table class="table" id="table_id">
-				<thead class="thead-dark" style="text-align:center">
+				<thead class="thead-dark" style="text-align:left">
 					<tr>
 						<th scope="col">Drone ID</th>
 						<th scope="col">Station</th>
@@ -20,19 +20,19 @@
 				<tbody>
 					{% for i in drones %}
 					<tr>
-						<td align="center">{{i.droneid}}</td>
-						<td align="center">{{i.locale}}</td>
+						<td align="left">{{i.droneid}}</td>
+						<td align="left">{{i.locale}}</td>
 						{% if i.status == 'm' %}
-						<td align="center">Maintenance</td>
+						<td align="left">Maintenance</td>
 						{% endif%}
 						{% if i.status == 'o' %}
-						<td align="center">On Loan</td>
+						<td align="left">On Loan</td>
 						{% endif%}
 						{% if i.status == 'a' %}
-						<td align="center">Available</td>
+						<td align="left">Available</td>
 						{% endif%}
 						{% if i.status == 'r' %}
-						<td align="center">Reserved</td>
+						<td align="left">Reserved</td>
 						{% endif%}
 					</tr>
 					{% endfor %}

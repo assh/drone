@@ -21,3 +21,8 @@ class CreateUser(UserCreationForm):
     class Meta:
         model=User
         fields=['username','email','password1','password2']
+
+class DroneForm(ModelForm):
+    class Meta:
+        model = Drone
+        fields = '__all__'
