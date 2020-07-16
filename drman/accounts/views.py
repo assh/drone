@@ -6,7 +6,7 @@ from .filters import MissionFilter
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required,permission_required
+from django.contrib.auth.decorators import login_required,permission_required,user_passes_test
 from .decorators import unauthenticated_user
 
 
@@ -44,7 +44,11 @@ def customer(request, pk):
     return render(request, 'accounts/customer.html', somedict)
 
 
+def is_valid(user):
+    return user.groups.filter(name='Admin').exists()
+
 @login_required(login_url='login')
+@user_passes_test(is_valid,login_url='main-home')
 def mission(request):
 
     mission = Mission.objects.all()
