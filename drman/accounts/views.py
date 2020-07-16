@@ -6,15 +6,15 @@ from .filters import MissionFilter
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from .decorators import unauthenticated_user,allowed_user
+from django.contrib.auth.decorators import login_required,permission_required
+from .decorators import unauthenticated_user
 
 
 @login_required(login_url='login')
 #@allowed_user(allowed=['admin'])
 def home(request):
     customer = Customer.objects.all()
-    mission = Mission.objects.all()
+    mission = Mission.objects.all().order_by('-mission_id')
     context = {
         'customer': customer,
         # 'mymission':mymission,

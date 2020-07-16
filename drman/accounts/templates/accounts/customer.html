@@ -2,9 +2,7 @@
 
 
 {% block content %}
-
-<br>
-
+left
 <div class="row">
 	<div class="col-md">
 		<div class="card card-body">
@@ -47,7 +45,7 @@
 		<div class="card card-body">
 
 			<table class="table" id="table_id">
-				<thead class="thead-dark" style="text-align:center">
+				<thead class="thead-dark" style="text-align:left">
 					<tr>
 						<th scope="col">Mission No.</th>
 						<th scope="col">Mission Status</th>
@@ -57,9 +55,9 @@
 				<tbody>
 					{% for mission in missions %}
 						<tr>
-							<td align="center">{{mission.mission_id}}</td>
-							<td align="center">{{mission.mission_status}}</td>
-							<td align="center">{{mission.drone.droneid}}</td>
+							<td align="left">{{mission.mission_id}}</td>
+							<td align="left">{{mission.mission_status}}</td>
+							<td align="left">{{mission.drone.droneid}}</td>
 						</tr>
 					{% endfor %}
 				</tbody>

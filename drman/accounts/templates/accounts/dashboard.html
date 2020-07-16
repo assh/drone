@@ -20,7 +20,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for cust in customer %}
+					{% for cust in customer|slice:":5"  %}
 					<tr>
 						<td><a class="btn btn-sm btn-info" href="{% url 'customer' cust.id %}">View</a></td>
 						<td align="center">{{cust.name}}</td>
@@ -58,7 +58,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for miss in mission %}
+					{% for miss in mission|slice:":5" %}
 					<tr>
 						<td align="center">{{miss.mission_id}}</td>
 						<td align="center">{{miss.date_future|date:"d/m/y H:i:s"}}</td>
