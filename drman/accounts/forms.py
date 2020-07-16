@@ -6,10 +6,12 @@ from django.contrib.auth.models import User
 
 
 class MissionForm(ModelForm):
-
     class Meta:
         model = Mission
         fields = '__all__'
+        widgets={
+            'date_future': forms.DateTimeInput(attrs={'placeholder':'yyyy-mm-dd hh:mm:ss'})
+        }
 
 class CustomerForm(ModelForm):
     

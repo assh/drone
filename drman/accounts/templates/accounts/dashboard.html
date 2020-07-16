@@ -16,13 +16,12 @@
 					<tr>
 						<th scope="col"></th>
 						<th scope="col">Customer</th>
-						<th scope="col">Mission</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for cust in customer|slice:":5"  %}
 					<tr>
-						<td><a class="btn btn-sm btn-info" href="{% url 'customer' cust.id %}">View</a></td>
+						<td><a class="btn btn-sm btn-info col-6" href="{% url 'customer' cust.id %}" style="">View</a></td>
 						<td align="center">{{cust.name}}</td>
 					</tr>
 					{% endfor %}
