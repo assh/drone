@@ -177,3 +177,17 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+@login_required(login_url='login')
+def createDrone(request):
+
+    form = DroneForm()
+    if request.method == 'POST':
+        form = DroneForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/drone_form.html', context)
