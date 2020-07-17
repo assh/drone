@@ -60,7 +60,7 @@ class Mission(models.Model):
     date_future = models.DateTimeField(auto_now_add=False, null=True)
     drone = models.ForeignKey(Drone, null=True, on_delete=models.SET_NULL)
     state = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
-    manager = models.OneToOneField(User,null=True,on_delete=models.SET_NULL)
+    manager = models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
     customer = models.ForeignKey(
         Customer, null=True, on_delete=models.SET_NULL)
     MISSION_TYPE = (

@@ -16,6 +16,7 @@
 						<th scope="col">Drone ID</th>
 						<th scope="col">Station</th>
 						<th scope="col">Status</th>
+						<th scope="col">Update</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -35,6 +36,7 @@
 						{% if i.status == 'r' %}
 						<td align="left">Reserved</td>
 						{% endif%}
+						<td align="left"><a class="btn btn-danger  btn-sm" href="{% url 'update-drone' i.id %}">Update Drone</a></td>
 					</tr>
 					{% endfor %}
 				</tbody>

@@ -48,7 +48,6 @@ def is_valid(user):
     return user.groups.filter(name='Admin').exists()
 
 @login_required(login_url='login')
-@user_passes_test(is_valid,login_url='main-home')
 def mission(request):
 
     mission = Mission.objects.all()
@@ -198,4 +197,17 @@ def createDrone(request):
     context = {
         'form': form,
     }
+    return render(request, 'accounts/drone_form.html', context)
+
+@login_required(login_url='login')
+def updateDrone(request, pk):
+
+    drone = Drone.objects.get(id=pk)
+    form = DroneForm(instance=drone)
+    if request.method == 'POST':
+        form = DroneForm(request.POST, instance=drone)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form': form}
     return render(request, 'accounts/drone_form.html', context)
