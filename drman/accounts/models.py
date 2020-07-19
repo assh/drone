@@ -39,6 +39,11 @@ class Drone(models.Model):
     status = models.CharField(
         max_length=1, choices=LOAN_STATUS, blank=True, default='m', null=True)
     locale = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
+    make = models.CharField(max_length=100,null=True,blank=True)
+    description = models.CharField(max_length=100,null=True,blank=True)
+    date_purchase = models.DateField(auto_now_add=False,auto_now=False,null=True,blank=True)
+    date_operation = models.DateField(auto_now_add=False,auto_now=False,null=True,blank=True)
+    date_shelved = models.DateField(auto_now_add=False,auto_now=False,null=True,blank=True)
 
     def __str__(self):
         return self.droneid
