@@ -6,13 +6,15 @@ from .filters import MissionFilter
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,permission_required,user_passes_test
+from .decorators import unauthenticated_user
 
 
 @login_required(login_url='login')
+#@allowed_user(allowed=['admin'])
 def home(request):
     customer = Customer.objects.all()
-    mission = Mission.objects.all()
+    mission = Mission.objects.all().order_by('-mission_id')
     context = {
         'customer': customer,
         # 'mymission':mymission,
@@ -41,6 +43,9 @@ def customer(request, pk):
                 'total_mission': total_mission}
     return render(request, 'accounts/customer.html', somedict)
 
+
+def is_valid(user):
+    return user.groups.filter(name='Admin').exists()
 
 @login_required(login_url='login')
 def mission(request):
@@ -105,8 +110,12 @@ def status(request):
         'customer': customer,
         # 'mymission':mymission,
         'mission': mission,
+        'total_missions':Mission.objects.all().count(),
         'total_drone': Drone.objects.all().count(),
         'maintenance_drone': Drone.objects.filter(status="m").count(),
+        'onloan_drone': Drone.objects.filter(status="o").count(),
+        'available_drone': Drone.objects.filter(status="a").count(),
+        'reserved_drone': Drone.objects.filter(status="r").count(),
         'mission_complete': Mission.objects.filter(mission_status="Complete").count(),
         'mission_pending': Mission.objects.filter(mission_status="Pending").count(),
         'mission_cancelled': Mission.objects.filter(mission_status="Cancelled").count(),
@@ -142,40 +151,85 @@ def updateCustomer(request, pk):
     return render(request, 'accounts/customer_form.html', context)
 
 
+@unauthenticated_user
 def registerPage(request):
 
-    if request.user.is_authenticated:
-        return redirect('main-home')
-    else:
-        form = CreateUser()
-        if request.method == 'POST':
-            form = CreateUser(request.POST)
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Account was created')
-                return redirect('login')
-        context = {'form': form}
-        return render(request, 'accounts/register.html', context)
+    form = CreateUser()
+    if request.method == 'POST':
+        form = CreateUser(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account was created')
+            return redirect('login')
+    context = {'form': form}
+    return render(request, 'accounts/register.html', context)
 
 
+@unauthenticated_user
 def loginPage(request):
-    if request.user.is_authenticated:
-        return redirect('main-home')
-    else:
-        if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('main-home')
-            else:
-                messages.info(request, 'Username or Password is incorrect')
-        context = {}
-        return render(request, 'accounts/login.html', context)
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('main-home')
+        else:
+            messages.info(request, 'Username or Password is incorrect')
+    context = {}
+    return render(request, 'accounts/login.html', context)
 
 
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+@login_required(login_url='login')
+def createDrone(request):
+
+    form = DroneForm()
+    if request.method == 'POST':
+        form = DroneForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/drone_form.html', context)
+
+@login_required(login_url='login')
+def updateDrone(request, pk):
+
+    drone = Drone.objects.get(id=pk)
+    form = DroneForm(instance=drone)
+    if request.method == 'POST':
+        form = DroneForm(request.POST, instance=drone)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form': form}
+    return render(request, 'accounts/drone_form.html', context)
+
+
+@login_required(login_url='login')
+def mymission(request):
+
+    mission = Mission.objects.all().filter(manager=request.user)
+    myFilter = MissionFilter(request.GET, queryset=mission)
+    mission = myFilter.qs
+    context = {
+        'myFilter': myFilter,
+        'missions': mission,
+    }
+    return render(request, 'accounts/mymission.html', context)
+
+@login_required(login_url='login')
+def my_drone(request,pk):
+
+    drone = Drone.objects.get(id=pk)
+    context = {
+        'drones':drone
+    }
+    return render(request,'accounts/my_drone.html',context)

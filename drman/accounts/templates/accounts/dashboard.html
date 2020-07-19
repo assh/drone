@@ -16,13 +16,12 @@
 					<tr>
 						<th scope="col"></th>
 						<th scope="col">Customer</th>
-						<th scope="col">Mission</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for cust in customer %}
+					{% for cust in customer|slice:":5"  %}
 					<tr>
-						<td><a class="btn btn-sm btn-info" href="{% url 'customer' cust.id %}">View</a></td>
+						<td><a class="btn btn-sm btn-info col-6" href="{% url 'customer' cust.id %}">View</a></td>
 						<td align="center">{{cust.name}}</td>
 					</tr>
 					{% endfor %}
@@ -40,7 +39,7 @@
 					<a class="btn btn-success  btn-sm btn-block" href="{% url 'create-mission' %}">Add New Mission</a>
 				</div>
 				<div class="col col-md">
-					<a class="btn btn-info  btn-sm btn-block" href="{% url 'all-mission' %}">View My Mission</a>
+					<a class="btn btn-info  btn-sm btn-block" href="{% url 'my-mission' %}">View My Mission</a>
 				</div>
 				<div class="col col-md">
 					<a class="btn btn-info  btn-sm btn-block" href="{% url 'all-mission' %}">View All Mission</a>
@@ -58,7 +57,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for miss in mission %}
+					{% for miss in mission|slice:":5" %}
 					<tr>
 						<td align="center">{{miss.mission_id}}</td>
 						<td align="center">{{miss.date_future|date:"d/m/y H:i:s"}}</td>

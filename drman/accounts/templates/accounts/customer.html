@@ -2,18 +2,15 @@
 
 
 {% block content %}
-
-<br>
-
 <div class="row">
 	<div class="col-md">
 		<div class="card card-body">
-			<a class="btn btn-danger" href="{% url 'create-customer' %}">Add New Customer</a></div>
+			<a class="btn btn-info" href="{% url 'create-customer' %}">Add New Customer</a></div>
 		<div class="card card-body">
 			<h5>Customer: {{customer.name}}</h5>
 			<hr>
 			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'update-customer' customer.id %}">Update Customer</a>
-			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete Customer</a>
+			<a class="btn btn-outline-primary  btn-sm btn-block" href="">Delete Customer</a>
 
 		</div>
 	</div>
@@ -37,28 +34,17 @@
 </div>
 
 
-<br>
-<div class="row">
-	<div class="col">
-		<div class="card card-body">
-			<form method="get">
-
-				<button class="btn btn-primary" type="submit">Search</button>
-			</form>
-		</div>
-	</div>
-
 </div>
 <br>
 
 <div class="row">
 	<div class="col">
-		<h5 class="text-center display-4">Orders Info</h5>
+		<h5 class="text-center">Orders Info</h5>
 		<hr>
 		<div class="card card-body">
 
-			<table class="table">
-				<thead class="thead-dark" style="text-align:center">
+			<table class="table" id="table_id">
+				<thead class="thead-dark" style="text-align:left">
 					<tr>
 						<th scope="col">Mission No.</th>
 						<th scope="col">Mission Status</th>
@@ -68,9 +54,9 @@
 				<tbody>
 					{% for mission in missions %}
 						<tr>
-							<td align="center">{{mission.mission_id}}</td>
-							<td align="center">{{mission.mission_status}}</td>
-							<td align="center">{{mission.drone.droneid}}</td>
+							<td align="left">{{mission.mission_id}}</td>
+							<td align="left">{{mission.mission_status}}</td>
+							<td align="left">{{mission.drone.droneid}}</td>
 						</tr>
 					{% endfor %}
 				</tbody>
@@ -79,3 +65,30 @@
 	</div>
 
 	{% endblock %}
+
+	{% block js %}
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/fh-3.1.7/kt-2.5.2/r-2.2.5/rg-1.1.2/sp-1.1.1/sl-1.3.1/datatables.min.css"/>
+	 
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/fh-3.1.7/kt-2.5.2/r-2.2.5/rg-1.1.2/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
+	<script>
+	  $(document).ready( function () {
+		$('#table_id').DataTable({
+	
+		  buttons:{
+			name:'primary',
+			buttons:['copy','csv','excel','pdf']
+		  }
+		}
+	
+	
+		);
+		table.buttons().container()
+			.appendTo( '#example_wrapper .col-md-6:eq(0)' );
+	} );
+	</script>
+	
+	{% endblock %}
+	

@@ -3,24 +3,69 @@
 {% block content %}
 {% load static %}
 <br>
-
-<div class="row">
-	<div class="col">
-		<div class="col-md">
+<div class="container">
+	<div class="row">
+		<div class="col col-md">
 			<div class="card text-center text-black  mb-3" id="total-drones">
 				<div class="card-header">
-					<h5 class="card-title">Total Drones</h5>
+					<h5 class="card-title">Drones Available</h5>
 				</div>
 				<div class="card-body">
-					<h3 class="card-title">{{total_drone}}</h3>
+					<h3 class="card-title">{{available_drone}}</h3>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<div class="col col-md">
+			<div class="card text-center text-black mb-3" id="maintenance">
+				<div class="card-header">
+					<h5 class="card-title">Drones Maintenance</h5>
+				</div>
+				<div class="card-body">
+					<h3 class="card-title">{{maintenance_drone}}</h3>
+				</div>
+			</div>
+		</div>
+		<div class="col col-md">
+			<div class="card text-center text-black mb-3" id="maintenance">
+				<div class="card-header">
+					<h5 class="card-title">Drones On Loan</h5>
+				</div>
+				<div class="card-body">
+					<h3 class="card-title">{{onloan_drone}}</h3>
+				</div>
+			</div>
+		</div>
+		<div class="col col-md">
+			<div class="card text-center text-black mb-3" id="maintenance">
+				<div class="card-header">
+					<h5 class="card-title">Drones Reserved</h5>
+				</div>
+				<div class="card-body">
+					<h3 class="card-title">{{reserved_drone}}</h3>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!-- ----------------------------------------------------Second Row------------------------------------------- -->
+	<div class="row">
+		<div class="col col-md">
+			<div class="card text-center text-black mb-3" id="maintenance">
+				<div class="card-header">
+					<h5 class="card-title">Total Missions</h5>
+				</div>
+				<div class="card-body">
+					<h3 class="card-title">{{total_missions}}</h3>
+				</div>
+			</div>
 
-	<div class="col">
-		<div class="col-md">
-			<div class="card text-center text-black  mb-3" id="completed">
+		</div>
+		<div class="col col-md">
+			<div class="card text-center text-black mb-3" id="maintenance">
 				<div class="card-header">
 					<h5 class="card-title">Missions Completed</h5>
 				</div>
@@ -29,10 +74,9 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="col">
-		<div class="col-md">
+
+		<div class="col col-md">
 			<div class="card text-center text-black  mb-3" id="pending">
 				<div class="card-header">
 					<h5 class="card-title">Missions Pending</h5>
@@ -42,9 +86,9 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col">
-		<div class="col-md">
+
+
+		<div class="col col-md">
 			<div class="card text-center text-black mb-3" id="cancelled">
 				<div class="card-header">
 					<h5 class="card-title">Missions Cancelled</h5>
@@ -54,20 +98,11 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
-	<div class="col">
-		<div class="col-md">
-			<div class="card text-center text-black mb-3" id="maintenance">
-				<div class="card-header">
-					<h5 class="card-title">Total Drone</h5>
-					<h5 class="card-title">Maintenance</h5>
-				</div>
-				<div class="card-body">
-					<h3 class="card-title">{{maintenance_drone}}</h3>
-				</div>
-			</div>
-		</div>
-	</div>
+
 </div>
+
+
 
 {% endblock %}

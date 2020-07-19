@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -39,6 +39,11 @@ class Drone(models.Model):
     status = models.CharField(
         max_length=1, choices=LOAN_STATUS, blank=True, default='m', null=True)
     locale = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
+    make = models.CharField(max_length=100,null=True,blank=True)
+    description = models.CharField(max_length=100,null=True,blank=True)
+    date_purchase = models.DateField(auto_now_add=False,auto_now=False,null=True,blank=True)
+    date_operation = models.DateField(auto_now_add=False,auto_now=False,null=True,blank=True)
+    date_shelved = models.DateField(auto_now_add=False,auto_now=False,null=True,blank=True)
 
     def __str__(self):
         return self.droneid
@@ -60,6 +65,7 @@ class Mission(models.Model):
     date_future = models.DateTimeField(auto_now_add=False, null=True)
     drone = models.ForeignKey(Drone, null=True, on_delete=models.SET_NULL)
     state = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
+    manager = models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
     customer = models.ForeignKey(
         Customer, null=True, on_delete=models.SET_NULL)
     MISSION_TYPE = (

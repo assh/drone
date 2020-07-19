@@ -16,4 +16,8 @@ urlpatterns = [
     path('register/', views.registerPage, name='register'),
     path('login/', views.loginPage, name='login'),
     path('logout/', views.logoutUser, name='logout'),
+    path('create_drone/', views.createDrone, name='create-drone'),
+    path('update_drone/<str:pk>', views.updateDrone, name='update-drone'),
+    path('my_mission/', views.mymission, name='my-mission'),
+    path('my_drone/<str:pk>',views.my_drone,name='my-drone'),
 ]
