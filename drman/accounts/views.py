@@ -224,3 +224,12 @@ def mymission(request):
         'missions': mission,
     }
     return render(request, 'accounts/mymission.html', context)
+
+@login_required(login_url='login')
+def my_drone(request,pk):
+
+    drone = Drone.objects.get(id=pk)
+    context = {
+        'drones':drone
+    }
+    return render(request,'accounts/my_drone.html',context)

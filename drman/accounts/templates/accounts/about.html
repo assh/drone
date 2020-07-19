@@ -22,7 +22,7 @@
 				<tbody>
 					{% for i in drones %}
 					<tr>
-						<td align="left">{{i.droneid}}</td>
+						<td align="left"><a href="{% url 'my-drone' i.id %}">{{i.droneid}}</a></td>
 						<td align="left">{{i.locale}}</td>
 						{% if i.status == 'm' %}
 						<td align="left">Maintenance</td>
