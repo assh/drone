@@ -230,6 +230,6 @@ def my_drone(request,pk):
 
     drone = Drone.objects.get(id=pk)
     context = {
-        'drones':drone
+        'drone':drone
     }
     return render(request,'accounts/my_drone.html',context)
