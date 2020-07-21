@@ -49,7 +49,7 @@ def is_valid(user):
 
 @login_required(login_url='login')
 def mission(request):
-
+    
     mission = Mission.objects.all()
     myFilter = MissionFilter(request.GET, queryset=mission)
     mission = myFilter.qs
@@ -229,7 +229,19 @@ def mymission(request):
 def my_drone(request,pk):
 
     drone = Drone.objects.get(id=pk)
+    form = MyDroneForm(instance=drone)
     context = {
-        'drones':drone
+        'drone':drone,
+        'form':form,
     }
     return render(request,'accounts/my_drone.html',context)
+
+@login_required(login_url='login')
+def launch_drone(request,pk):
+    launch = Launch.objects.get(id=pk)
+    form = LaunchForm(instance=launch)
+
+    context ={
+        'launch':launch,
+        'form':form
+    }

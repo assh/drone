@@ -92,7 +92,16 @@ class Mission(models.Model):
     mission_status = models.CharField(
         max_length=10, choices=STATE_TYPE, default='Pending', blank=True, null=True)
 
-    
+    LAUNCH_MODE ={
+        ('AUTO','AUTO'),
+        ('MANUAL','MANUAL')
+    }
+    launch_mode = models.CharField(max_length=7,choices=LAUNCH_MODE,default='MANUAL',null=True)
 
     def __str__(self):
         return self.mission_id
+
+class Launch(models.Model):
+
+    mission = models.OneToOneField(Mission,on_delete=models.CASCADE,null=True,default='0')
+    launch_now = models.BooleanField(null=True,default=False)

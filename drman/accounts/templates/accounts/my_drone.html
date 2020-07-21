@@ -1,9 +1,68 @@
 {% extends 'accounts/main.html' %}
-
+{% load crispy_forms_tags  %}
 {% block content %}
 
 <div class="container">
-    
+    <div class="card card-body">
+
+        <form action="" method="POST">
+            {{form|crispy}}
+        </form>
+        <!-- <div class="row">
+            <div class="col col-md mx-5 my-2">
+                <h4>Drone ID: </h4>
+            </div>
+            <div class="col col-md mx-5 my-2">
+                <h4>{{drone.droneid}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md mx-5 my-2">
+                <h4>Drone Status:</h4>
+            </div>
+            <div class="col col-md mx-5 my-2">
+                {% if drone.status == 'm' %}
+                <td align="left">
+                    <h4>Maintenance</h4>
+                </td>
+                {% endif%}
+                {% if drone.status == 'o' %}
+                <td align="left">
+                    <h4>On Loan</h4>
+                </td>
+                {% endif%}
+                {% if drone.status == 'a' %}
+                <td align="left">
+                    <h4>Available</h4>
+                </td>
+                {% endif%}
+                {% if drone.status == 'r' %}
+                <td align="left">
+                    <h4>Reserved</h4>
+                </td>
+                {% endif%}
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <div class="col col-md mx-5 my-2">
+                <h4>Drone Station: </h4>
+            </div>
+            <div class="col col-md mx-5 my-2">
+                <h4>{{drone.locale}}</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-md mx-5 my-2">
+                <h4>Drone ID: </h4>
+            </div>
+            <div class="col col-md mx-5 my-2">
+                <h4>{{drone.droneid}}</h4>
+            </div>
+        </div> -->
+    </div>
 </div>
 
 {% endblock %}

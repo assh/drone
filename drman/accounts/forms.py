@@ -28,3 +28,18 @@ class DroneForm(ModelForm):
     class Meta:
         model = Drone
         fields = '__all__'
+
+class MyDroneForm(ModelForm):
+    class Meta:
+        model = Drone
+        fields = '__all__'
+        widgets = {
+        'droneid': forms.TextInput(attrs={'disabled': 'true'}),
+        'status': forms.TextInput(attrs={'disabled': 'true'}),
+    }
+
+class LaunchForm(ModelForm):
+
+    class Meta:
+        model=Launch
+        fields= '__all__'

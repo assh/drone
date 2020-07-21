@@ -4,9 +4,14 @@
 		}
 
 
-		#total-drones{
-			background-color: #ffffff;
+		#tdrone{
+			background-color: #597bc5;
 		}
+
+		#bdrone{
+			background-color: #8dd66b;
+		}
+
         #completed{
 			background-color: #52e49b;
 		}
@@ -25,4 +30,14 @@
 		#headlaunch{
 			background-color: #248faf ;
 		}
+		#toprow{
+			background-color: #248faf;
+		}
 
+		#bottomrow{
+			background-color: #95f5b2;
+		}
+
+		#btnlaunch{
+			background-color: #33ccff;
+		}

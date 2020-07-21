@@ -1,11 +1,12 @@
 {% extends 'accounts/main.html' %}
 {% load crispy_forms_tags  %}
+{% load static %}
 {% block content %}
 
 
 <div class="card card-body">
 <table class="table table-hover table-striped" id="table_id">
-  <thead class="thead-light" style="text-align:left">
+  <thead style="text-align:left" id="btnlaunch">
     <tr>
       <th scope="col">Mission No</th>
       <th scope="col">Drone Station</th>
@@ -47,11 +48,11 @@
       <td align="left">{{mission.mission_status}}
 
       <td align="left">{{mission.customer.name}}
-        {% if mission.mission_status == 'Pending'%}
-      <td align="center"><button type="button" class="btn btn-danger btn-sm" href="#" data-toggle="modal"
-          data-target="#staticBackdrop">Launch</button></td>
+        {% if mission.launch_mode == 'MANUAL'%}
+      <td align="center"><button type="button" class="btn btn-sm" href="#" data-toggle="modal"
+          data-target="#staticBackdrop" id ="btnlaunch">MANUAL</button></td>
       {% else %}
-      <td align="center"><button type="button" class="btn btn-danger btn-sm" href="#" disabled>Launch</button></td>
+      <td align="center"><button type="button" class="btn btn-sm" href="#" disabled id ="btnlaunch">AUTO</button></td>
       {% endif %}
     </tr>
     {% endfor %}
