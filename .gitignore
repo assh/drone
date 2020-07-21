@@ -6,3 +6,4 @@ drman/drman/__pycache__/
 drman/accounts/migrations/
 .vscode/settings.json
 .vscode/settings.json
+drman/static/images/
