@@ -97,6 +97,7 @@ class Mission(models.Model):
         ('MANUAL','MANUAL')
     }
     launch_mode = models.CharField(max_length=7,choices=LAUNCH_MODE,default='MANUAL',null=True)
+    mission_pic = models.ImageField(null=True,blank=True)
 
     def __str__(self):
         return self.mission_id
