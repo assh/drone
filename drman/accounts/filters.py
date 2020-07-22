@@ -12,4 +12,4 @@ class MissionFilter(django_filters.FilterSet):
     class Meta:
         model = Mission
         fields = '__all__'
-        exclude = ['customer', 'date_future']
+        exclude = ['customer', 'date_future','mission_pic']
