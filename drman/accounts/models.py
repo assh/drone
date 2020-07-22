@@ -98,6 +98,7 @@ class Mission(models.Model):
     }
     launch_mode = models.CharField(max_length=7,choices=LAUNCH_MODE,default='MANUAL',null=True)
     mission_pic = models.ImageField(null=True,blank=True,default="logo.png")
+    launch_now = models.BooleanField(null=True,default=False)
 
     def __str__(self):
         return self.mission_id
@@ -105,4 +106,4 @@ class Mission(models.Model):
 class Launch(models.Model):
 
     mission = models.OneToOneField(Mission,on_delete=models.CASCADE,null=True,default='0')
-    launch_now = models.BooleanField(null=True,default=False)
+    
