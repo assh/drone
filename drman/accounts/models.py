@@ -106,4 +106,4 @@ class Mission(models.Model):
 class Launch(models.Model):
 
     mission = models.OneToOneField(Mission,on_delete=models.CASCADE,null=True,default='0')
-    
+    now = models.CharField(max_length=1,default='1',null=True)
