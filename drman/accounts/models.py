@@ -101,9 +101,12 @@ class Mission(models.Model):
     launch_now = models.BooleanField(null=True,default=False)
 
     def __str__(self):
-        return self.mission_id
+        return str(self.mission_id)
 
 class Launch(models.Model):
 
-    mission = models.OneToOneField(Mission,on_delete=models.CASCADE,null=True,default='0')
+    mission = models.CharField(max_length=10,null=True)
     now = models.CharField(max_length=1,default='1',null=True)
+
+    def __str__(self):
+        return self.mission
