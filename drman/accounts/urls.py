@@ -20,4 +20,5 @@ urlpatterns = [
     path('update_drone/<str:pk>', views.updateDrone, name='update-drone'),
     path('my_mission/', views.mymission, name='my-mission'),
     path('my_drone/<str:pk>',views.my_drone,name='my-drone'),
+    path('launch_drone/<str:pk>',views.launch_drone,name='launch-drone'),
 ]
