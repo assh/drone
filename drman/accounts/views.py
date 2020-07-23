@@ -238,10 +238,15 @@ def my_drone(request,pk):
 
 @login_required(login_url='login')
 def launch_drone(request,pk):
-    launch = Launch.objects.get(id=pk)
-    form = LaunchForm(instance=launch)
-
+    mission = Mission.objects.get(id=pk)
+    form = LaunchForm(instance=mission)
+    if request.method == 'POST':
+        form = LaunchForm(request.POST, instance=mission)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
     context ={
-        'launch':launch,
+        'mission':mission,
         'form':form
     }
+    return render(request,'accounts/launch_func.html',context)

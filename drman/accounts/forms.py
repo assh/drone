@@ -41,5 +41,5 @@ class MyDroneForm(ModelForm):
 class LaunchForm(ModelForm):
 
     class Meta:
-        model=Launch
-        fields= '__all__'
+        model=Mission
+        fields= ['launch_now']
