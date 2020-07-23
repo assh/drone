@@ -8,14 +8,17 @@
             <h5 class="card-title">Do you want to Launch {{mission.mission_id}} ?</h5>
         </div>
         <div class="card-body">
-            <p class="card-text">Please make sure you comply with local rules and regulations and take into account
+            <p class="card-text col-md-12">Please make sure you comply with local rules and regulations and take into
+                account
                 local weather conditions.
                 <b>Failure to comply with these rules may result in significant financial and/or legal consequences.</b>
             </p>
             <form action="" method="POST">
                 {% csrf_token %}
-                {{form|crispy}}
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group col-md-4">
+                    {{form|crispy}}
+                </div>
+                <div class="col-md-12"><button type="submit" class="btn btn-danger">Submit</button></div>
             </form>
         </div>
     </div>

@@ -99,7 +99,7 @@ def updateMission(request, pk):
         'form': form,
 
     }
-    return render(request, 'accounts/mission_form.html', context)
+    return render(request, 'accounts/mission_update_form.html', context)
 
 
 @login_required(login_url='login')
