@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%u!#90hghj1jee*yc)_ni-z9rgdw63y7xx=m6$(w8$04*ricrr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['drone-asish.herokuapp.com','127.0.0.1']
 
