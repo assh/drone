@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath drman.wsgi:application --log-file -
+web: gunicorn --chdir drman drman.wsgi:application --log-file -
