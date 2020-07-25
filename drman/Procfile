@@ -1,1 +1,1 @@
-web: gunicorn drman.drman.wsgi:application --log-file -
+web: gunicorn drman.wsgi:application --log-file -
