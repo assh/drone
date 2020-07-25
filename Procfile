@@ -1,1 +1,1 @@
-web: gunicorn drman.wsgi
+web: gunicorn drman.drman.wsgi
