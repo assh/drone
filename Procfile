@@ -1,0 +1,1 @@
+web: gunicorn --chdir drman drman.wsgi:application --log-file -
