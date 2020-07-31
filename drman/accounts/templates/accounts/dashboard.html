@@ -22,7 +22,7 @@
 					{% for cust in customer|slice:":5"  %}
 					<tr>
 						<td><a class="btn btn-sm btn-info col-6" href="{% url 'customer' cust.id %}">View</a></td>
-						<td align="center">{{cust.name}}</td>
+						<td align="center">{{cust.company_name}}</td>
 					</tr>
 					{% endfor %}
 				</tbody>

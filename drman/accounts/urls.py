@@ -1,5 +1,6 @@
 
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from . import views
 urlpatterns = [
 
@@ -19,6 +20,15 @@ urlpatterns = [
     path('create_drone/', views.createDrone, name='create-drone'),
     path('update_drone/<str:pk>', views.updateDrone, name='update-drone'),
     path('my_mission/', views.mymission, name='my-mission'),
-    path('my_drone/<str:pk>',views.my_drone,name='my-drone'),
-    path('launch_drone/<str:pk>',views.launch_drone,name='launch-drone'),
+    path('my_drone/<str:pk>', views.my_drone, name='my-drone'),
+    path('launch_drone/<str:pk>', views.launch_drone, name='launch-drone'),
+
+    path('reset_password/', auth_views.PasswordResetView.as_view(),
+         name='reset_password'),
+    path('reset_password_done/', auth_views.PasswordResetDoneView.as_view(),
+         name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(),
+         name='password_reset_confirm'),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(),
+         name='password_reset_complete'),
 ]
