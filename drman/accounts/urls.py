@@ -8,6 +8,7 @@ urlpatterns = [
     path('about/', views.about, name='drone'),
     path('customer/<str:pk>/', views.customer, name='customer'),
     path('statistics/', views.status, name='status'),
+    path('customer_list/', views.customer_list, name='customer-list'),
     path('mission/', views.mission, name='all-mission'),
     path('launch/<str:pk>/', views.launch, name='launch'),
     path('create_mission/', views.createMission, name='create-mission'),
