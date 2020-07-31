@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG_VALUE')
 
 ALLOWED_HOSTS = ['drone-asish.herokuapp.com','127.0.0.1']
 
@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'drman.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'demo_1',
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT')
     }
 }
 
@@ -120,6 +124,15 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_PORT = ''
+#EMAIL_USE_TLS = 
+#EMAIL_HOST_USER = 
+#EMAIL_HOST_PASSWORD = 
 
 
 # Static files (CSS, JavaScript, Images)
