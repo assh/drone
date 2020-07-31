@@ -33,6 +33,13 @@ def about(request):
     dr = Drone.objects.all()
     return render(request, 'accounts/about.html', {'drones': dr})
 
+@login_required(login_url='login')
+def customer_list(request):
+    customer = Customer.objects.all()
+    context ={
+        'customers':customer
+    }
+    return render(request,'accounts/customer_list.html',context)
 
 @login_required(login_url='login')
 def customer(request, pk):
