@@ -122,14 +122,14 @@ class Mission(models.Model):
     )
 
     mission_type = models.CharField(
-        max_length=1, choices=MISSION_TYPE, blank=True, default='2', null=True)
+        max_length=10, choices=MISSION_TYPE, blank=True, default='2', null=True)
 
     INFO_TYPE = (
         ('1', 'Photo'),
         ('2', 'Video'),
     )
     mode_type = models.CharField(
-        max_length=1, choices=INFO_TYPE, blank=True, default='1', null=True)
+        max_length=10, choices=INFO_TYPE, blank=True, default='1', null=True)
 
     STATE_TYPE = (
         ('Pending', 'Pending'),

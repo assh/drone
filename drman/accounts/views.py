@@ -6,15 +6,18 @@ from .filters import MissionFilter
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required,permission_required,user_passes_test
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from .decorators import unauthenticated_user
+import csv
+import io
+from datetime import datetime, timedelta
 
 
 @login_required(login_url='login')
-#@allowed_user(allowed=['admin'])
+# @allowed_user(allowed=['admin'])
 def home(request):
-    customer = Customer.objects.all()
-    mission = Mission.objects.all().order_by('-mission_id')
+    customer = Customer.objects.all()[0:5]
+    mission = Mission.objects.all().order_by('-mission_id')[0:5]
     context = {
         'customer': customer,
         # 'mymission':mymission,
@@ -33,13 +36,15 @@ def about(request):
     dr = Drone.objects.all()
     return render(request, 'accounts/about.html', {'drones': dr})
 
+
 @login_required(login_url='login')
 def customer_list(request):
     customer = Customer.objects.all()
-    context ={
-        'customers':customer
+    context = {
+        'customers': customer
     }
-    return render(request,'accounts/customer_list.html',context)
+    return render(request, 'accounts/customer_list.html', context)
+
 
 @login_required(login_url='login')
 def customer(request, pk):
@@ -54,10 +59,11 @@ def customer(request, pk):
 def is_valid(user):
     return user.groups.filter(name='Admin').exists()
 
+
 @login_required(login_url='login')
 def mission(request):
-    
-    mission = Mission.objects.all()
+    one_week_ago = datetime.today() - timedelta(days=7)
+    mission = Mission.objects.filter(date__lte=one_week_ago)
     myFilter = MissionFilter(request.GET, queryset=mission)
     mission = myFilter.qs
     context = {
@@ -82,7 +88,7 @@ def createMission(request):
 
     form = Mission2Form()
     if request.method == 'POST':
-        form = Mission2Form(request.POST,request.FILES)
+        form = Mission2Form(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('/')
@@ -117,7 +123,7 @@ def status(request):
         'customer': customer,
         # 'mymission':mymission,
         'mission': mission,
-        'total_missions':Mission.objects.all().count(),
+        'total_missions': Mission.objects.all().count(),
         'total_drone': Drone.objects.all().count(),
         'maintenance_drone': Drone.objects.filter(status="m").count(),
         'onloan_drone': Drone.objects.filter(status="o").count(),
@@ -192,6 +198,7 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
+
 @login_required(login_url='login')
 def createDrone(request):
 
@@ -205,6 +212,7 @@ def createDrone(request):
         'form': form,
     }
     return render(request, 'accounts/drone_form.html', context)
+
 
 @login_required(login_url='login')
 def updateDrone(request, pk):
@@ -232,19 +240,21 @@ def mymission(request):
     }
     return render(request, 'accounts/mymission.html', context)
 
+
 @login_required(login_url='login')
-def my_drone(request,pk):
+def my_drone(request, pk):
 
     drone = Drone.objects.get(id=pk)
     form = MyDroneForm(instance=drone)
     context = {
-        'drone':drone,
-        'form':form,
+        'drone': drone,
+        'form': form,
     }
-    return render(request,'accounts/my_drone.html',context)
+    return render(request, 'accounts/my_drone.html', context)
+
 
 @login_required(login_url='login')
-def launch_drone(request,pk):
+def launch_drone(request, pk):
     mission = Mission.objects.get(id=pk)
     form = LaunchForm(instance=mission)
     if request.method == 'POST':
@@ -252,11 +262,40 @@ def launch_drone(request,pk):
         if form.is_valid():
             form.save()
             return redirect('/')
-    context ={
-        'mission':mission,
-        'form':form
+    context = {
+        'mission': mission,
+        'form': form
     }
-    return render(request,'accounts/launch_func.html',context)
+    return render(request, 'accounts/launch_func.html', context)
+
 
 def regRedirect(request):
-    return render(request,'accounts/register_redirect.html')
+    return render(request, 'accounts/register_redirect.html')
+
+
+def testing(request):
+
+    if (request.method == 'GET'):
+        return render(request, 'accounts/test.html')
+
+    csv_file = request.FILES['file']
+
+    dataset = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(dataset)
+    next(io_string)
+    for row in csv.reader(io_string):
+        print(row[0])
+        create_me = Mission.objects.create(
+            mission_id=row[0],
+            state=Location.objects.get(location_id=row[1]),
+            drone=Drone.objects.get(droneid=row[2]),
+            mission_type=row[3],
+            date=row[4],
+            time=row[5],
+            mission_status=row[6],
+            launch_mode=row[7],
+            customer=Customer.objects.get(customer_id=row[8])
+
+
+        )
+    return render(request, 'accounts/test.html')
