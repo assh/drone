@@ -63,11 +63,11 @@ def is_valid(user):
 @login_required(login_url='login')
 def mission(request):
     one_week_ago = datetime.today() - timedelta(days=7)
-    mission = Mission.objects.filter(date__lte=one_week_ago)
-    myFilter = MissionFilter(request.GET, queryset=mission)
-    mission = myFilter.qs
+    mission = Mission.objects.order_by('-mission_id')[0:30]
+    #myFilter = MissionFilter(request.GET, queryset=mission)
+    #mission = myFilter.qs
     context = {
-        'myFilter': myFilter,
+        #'myFilter': myFilter,
         'missions': mission,
     }
     return render(request, 'accounts/allorder.html', context)
