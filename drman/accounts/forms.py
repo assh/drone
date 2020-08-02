@@ -16,6 +16,7 @@ class CustomerForm(ModelForm):
     class Meta:
         model = Customer
         fields = '__all__'
+        exclude = ['date_start','date_end','date_created']
 
 class CreateUser(UserCreationForm):
     class Meta:
