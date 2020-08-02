@@ -42,11 +42,11 @@
 
       <td align="left">Video</td>
       {% endif %}
-      <td align="left">{{mission.date_future|date:"d/m/y"}}</td>
-      <td align="left">{{mission.date_future|date:"H:i:s"}}</td>
+      <td align="left">{{mission.date|date:"d/m/y"}}</td>
+      <td align="left">{{mission.time|date:"H:i:s"}}</td>
       <td align="left">{{mission.mission_status}}
 
-      <td align="left">{{mission.customer.name}}
+      <td align="left">{{mission.customer.customer_id}}
         {% if mission.launch_mode == 'MANUAL' and mission.launch_now == False %}
       <td align="center"><a type="button" class="btn btn-sm" href="{% url 'launch-drone' mission.id%}" id ="btnlaunch">MANUAL</a></td>
       {% endif %}

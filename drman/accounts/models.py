@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import csv
 # Create your models here.
 
 
@@ -31,9 +32,9 @@ class Customer(models.Model):
     zip_code = models.CharField(max_length=20, null=True)
     state = models.CharField(max_length=20, null=True)
     country = models.CharField(max_length=50, null=True)
-    date_created = models.DateField(auto_now_add=True, null=True,blank=True)
-    date_start = models.DateField(auto_now_add=True, null=True,blank=True)
-    date_end = models.DateField(auto_now_add=True, null=True,blank=True)
+    date_created = models.DateField(auto_now=True, null=True,blank=True)
+    date_start = models.DateField(auto_now=True, null=True,blank=True)
+    date_end = models.DateField(auto_now_add=False, null=True,blank=True)
 
     def __str__(self):
         return f'{self.customer_id}'
@@ -107,7 +108,8 @@ class Mission(models.Model):
 
     mission_id = models.CharField(
         max_length=10, null=True, default=incrementid, editable=False)
-    date_future = models.DateTimeField(auto_now_add=False, null=True)
+    date = models.DateField(auto_now_add=False, null=True)
+    time = models.TimeField(auto_now_add=False,null=True)
     drone = models.ForeignKey(Drone, null=True, on_delete=models.SET_NULL)
     state = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
     manager = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
@@ -132,10 +134,11 @@ class Mission(models.Model):
     STATE_TYPE = (
         ('Pending', 'Pending'),
         ('Complete', 'Complete'),
-        ('Cancelled', 'Cancelled')
+        ('Cancelled', 'Cancelled'),
+        ('On Schedule','On Schedule')
     )
     mission_status = models.CharField(
-        max_length=10, choices=STATE_TYPE, default='Pending', blank=True, null=True)
+        max_length=15, choices=STATE_TYPE, default='Pending', blank=True, null=True)
 
     LAUNCH_MODE = {
         ('AUTO', 'AUTO'),
@@ -143,7 +146,7 @@ class Mission(models.Model):
     }
     launch_mode = models.CharField(
         max_length=7, choices=LAUNCH_MODE, default='MANUAL', null=True)
-    mission_pic = models.ImageField(null=True, blank=True, default="logo.png")
+    mission_pic = models.ImageField(null=True, blank=True, default="logo.png",upload_to='mission_img')
     launch_now = models.BooleanField(null=True, default=False)
 
     def __str__(self):
@@ -157,3 +160,97 @@ class Launch(models.Model):
 
     def __str__(self):
         return self.mission
+
+
+class CSVFileFolder(models.Model):
+
+    csf_file = models.FileField(upload_to='csvfodler')
+
+    def save(self, *args, **kwargs):
+        """
+        This is where you analyze the CSV file and update 
+        Category and Product models' data
+        """
+        super(CSVFileFolder, self).save(*args, **kwargs)
+        self.csv_file.open(mode='rb')
+        f = csv.reader(self.csv_file)
+        for row in f:
+            # currently the row is a list of all fields in CSV file
+            # change it to a dict for ease
+            #row_dict = self.row_to_dict(row) # this method is defined below
+            # check if product exists in db
+            mission = self.product_is_in_db(row['\ufeffmission_id']) # this method is defined below
+            if mission:
+                # product is in db
+                # update fields values
+                self.update_product(mission, row) # this method is defined below
+            else:
+                # product is not in db
+                # create this product
+                self.create_product(row) # this method is defined below
+
+        self.csv_file.close()
+
+
+    def row_to_dict(self, row):
+        """Returns the given row in a dict format"""
+        # Here's how the row list looks like:
+        # ['category', 'product name', 'product uid' 'price', 'qty']
+        return {'category': row[0], 'name': row[1], 
+            'uid': row[2], 'price': row[3], 'qty': row[4]
+            }
+
+    def product_is_in_db(self, uid):
+        """Check the product is in db. 
+        If yes, return the product, else return None
+        """
+        try:
+            return Mission.objects.get(mission_id=uid)
+        except Mission.DoesNotExist:
+            return None
+
+    def update_product(self, mission, row):
+        """Update the given product with new data in row_dict"""
+        mission.mission_id = row['mission_id']
+        #mission.state = row['state']
+        #mission.drone = row['drone']
+        mission.mission_type = row['mission_type']
+        mission.date = row['date']
+        mission.time = row['time']
+        mission.mission_status = row['mission_status']
+        mission.mode_type = row['mode_type']
+        #mission.customer = row['customer']
+        mission.save()
+
+    def create_product(self, row_dict):
+        # First see, if category exists
+        # If not, create a new category
+        try:
+            state = Location.objects.get(row['state'])
+        except Location.DoesNotExist:
+            state = None
+        try:
+            drone = Drone.objects.get(row['drone'])
+        except Drone.DoesNotExist:
+            drone = None
+        
+        try:
+            customer = Customer.objects.get(row['customer'])
+        except Customer.DoesNotExist:
+            customer = None
+
+
+
+        # Now, create the product
+        Mission.objects.create(
+            mission_id = row['mission_id'],
+            state = row['state'],
+            drone = row['drone'],
+            mission_type = row['mission_type'],
+            date = row['date'],
+            time = row['time'],
+            mission_status = row['mission_status'],
+            mode_type = row['mode_type'],
+            customer = row['customer'],
+        )
+        print("uPDATING")

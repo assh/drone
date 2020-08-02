@@ -9,15 +9,20 @@ class MissionForm(ModelForm):
     class Meta:
         model = Mission
         fields = '__all__'
-        widgets={
-            'date_future': forms.DateTimeInput(attrs={'placeholder':'yyyy-mm-dd hh:mm:ss'})
-        }
+
+class Mission2Form(ModelForm):
+    class Meta:
+        model = Mission
+        fields = '__all__'
+        exclude = ['launch_now']
+        
 
 class CustomerForm(ModelForm):
     
     class Meta:
         model = Customer
         fields = '__all__'
+        exclude = ['date_start','date_end','date_created']
 
 class CreateUser(UserCreationForm):
     class Meta:

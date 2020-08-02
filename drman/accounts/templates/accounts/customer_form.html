@@ -7,6 +7,18 @@
     <div class="card card-body">
 <form action="" method="POST">
     {% csrf_token %}
+    {{form.customer_id|as_crispy_field}}
+    <div class="form-row">
+        <div class="form-group col-md-4 mb-0">
+            {{form.first_name|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-4 mb-0">
+            {{form.middle_name|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-4 mb-0">
+            {{form.last_name|as_crispy_field}}
+        </div>
+    </div>
     <div class="form-row">
         <div class="form-group col-md-6 mb-0">
             {{form.company_name|as_crispy_field}}
@@ -23,8 +35,46 @@
             {{form.mobile|as_crispy_field}}
         </div>
     </div>
-    {{form.line1|as_crispy_field}}
-    
+    <br>
+    <div class="form-row">
+        <div class="form-group col-md-6 mb-0">
+            {{form.line1|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            {{form.line2|as_crispy_field}}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6 mb-0">
+            {{form.line3|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            {{form.zip_code|as_crispy_field}}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4 mb-0">
+            {{form.city|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-4 mb-0">
+            {{form.state|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-4 mb-0">
+            {{form.country|as_crispy_field}}
+        </div>
+    </div>
+    <br>
+    <div class="form-row">
+        <div class="form-group col-md-4 mb-0">
+            {{form.status|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-4 mb-0">
+            {{form.system_access|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-4 mb-0">
+            {{form.zone|as_crispy_field}}
+        </div>
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>

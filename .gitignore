@@ -7,3 +7,4 @@ drman/accounts/migrations/
 .vscode/settings.json
 .vscode/settings.json
 drman/static/images/
+drman/accounts/mission.csv
