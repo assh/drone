@@ -167,7 +167,7 @@ def registerPage(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Account was created')
-            return redirect('login')
+            return redirect('register-redirect')
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
 
@@ -257,3 +257,6 @@ def launch_drone(request,pk):
         'form':form
     }
     return render(request,'accounts/launch_func.html',context)
+
+def regRedirect(request):
+    return render(request,'accounts/register_redirect.html')
