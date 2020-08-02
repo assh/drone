@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import csv
 # Create your models here.
 
 
@@ -107,7 +108,8 @@ class Mission(models.Model):
 
     mission_id = models.CharField(
         max_length=10, null=True, default=incrementid, editable=False)
-    date_future = models.DateTimeField(auto_now_add=False, null=True)
+    date = models.DateField(auto_now_add=False, null=True)
+    time = models.TimeField(auto_now_add=False,null=True)
     drone = models.ForeignKey(Drone, null=True, on_delete=models.SET_NULL)
     state = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
     manager = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
@@ -132,10 +134,11 @@ class Mission(models.Model):
     STATE_TYPE = (
         ('Pending', 'Pending'),
         ('Complete', 'Complete'),
-        ('Cancelled', 'Cancelled')
+        ('Cancelled', 'Cancelled'),
+        ('On Schedule','On Schedule')
     )
     mission_status = models.CharField(
-        max_length=10, choices=STATE_TYPE, default='Pending', blank=True, null=True)
+        max_length=15, choices=STATE_TYPE, default='Pending', blank=True, null=True)
 
     LAUNCH_MODE = {
         ('AUTO', 'AUTO'),
@@ -157,3 +160,33 @@ class Launch(models.Model):
 
     def __str__(self):
         return self.mission
+
+
+class CSVFile(models.Model):
+
+    csf_file = models.FileField(upload_to='csvfiles')
+
+    #def save(self, *args, **kwargs):
+        #"""
+        #This is where you analyze the CSV file and update 
+        #Category and Product models' data
+        #"""
+        #super(CSVFile, self).save(*args, **kwargs)
+        #self.csv_file.open(mode='rb')
+        #f = csv.DictReader(self.csv_file)
+        #for row in f:
+            # currently the row is a list of all fields in CSV file
+            # change it to a dict for ease
+            #row_dict = self.row_to_dict(row) # this method is defined below
+            # check if product exists in db
+            #product = self.product_is_in_db(row_dict['uid']) # this method is defined below
+            #if product:
+                # product is in db
+                # update fields values
+                #self.update_product(product, row_dict) # this method is defined below
+            #else:
+                # product is not in db
+                # create this product
+                #self.create_product(row_dict) # this method is defined below
+
+        #self.csv_file.close()
