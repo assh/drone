@@ -18,6 +18,7 @@ urlpatterns = [
     path('register/', views.registerPage, name='register'),
     path('login/', views.loginPage, name='login'),
     path('logout/', views.logoutUser, name='logout'),
+    path('testing/', views.testing, name='testing'),
     path('reg_redirect/', views.regRedirect, name='register-redirect'),
     path('create_drone/', views.createDrone, name='create-drone'),
     path('update_drone/<str:pk>', views.updateDrone, name='update-drone'),
