@@ -9,6 +9,12 @@ class MissionForm(ModelForm):
     class Meta:
         model = Mission
         fields = '__all__'
+
+class Mission2Form(ModelForm):
+    class Meta:
+        model = Mission
+        fields = '__all__'
+        exclude = ['launch_now']
         
 
 class CustomerForm(ModelForm):

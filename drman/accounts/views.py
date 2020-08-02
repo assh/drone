@@ -80,9 +80,9 @@ def launch(request, pk):
 @login_required(login_url='login')
 def createMission(request):
 
-    form = MissionForm()
+    form = Mission2Form()
     if request.method == 'POST':
-        form = MissionForm(request.POST)
+        form = Mission2Form(request.POST,request.FILES)
         if form.is_valid():
             form.save()
             return redirect('/')
