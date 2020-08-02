@@ -26,8 +26,8 @@
     {% for mission in missions %}
     <tr>
       <td align="left"><a href="{% url 'launch' mission.id %}">{{mission.mission_id}}</a></td>
-      <td align="left">{{mission.state}}</td>
-      <td align="left">{{mission.drone}}</td>
+      <td align="left">{{mission.state.location_id}}</td>
+      <td align="left">{{mission.drone.droneid}}</td>
 
       {% if mission.mission_type == '1' %}
       <td align="left">Loiter</td>
