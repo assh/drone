@@ -60,7 +60,7 @@
 					{% for miss in mission|slice:":5" %}
 					<tr>
 						<td align="center">{{miss.mission_id}}</td>
-						<td align="center">{{miss.date_future|date:"d/m/y H:i:s"}}</td>
+						<td align="center">{{miss.date|date:"d/m/y"}} {{miss.time|date:"H:i:s"}}</td>
 						<td align="center">{{miss.mission_status}}</td>
 						<td align="center"><a class="btn btn-info btn-sm" href="{% url 'launch' miss.id %}">View</a>
 						</td>
@@ -70,7 +70,6 @@
 			</table>
 		</div>
 	</div>
-
 </div>
 
 {% endblock %}
