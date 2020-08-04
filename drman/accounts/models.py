@@ -65,7 +65,7 @@ class Location(models.Model):
 
 class Drone(models.Model):
 
-    droneid = models.CharField(max_length=200, null=True)
+    droneid = models.CharField("Drone ID",max_length=200, null=True)
     LOAN_STATUS = (
         ('m', 'Maintenance'),
         ('o', 'On loan'),
@@ -75,7 +75,7 @@ class Drone(models.Model):
 
     status = models.CharField(
         max_length=1, choices=LOAN_STATUS, blank=True, default='m', null=True)
-    locale = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
+    locale = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL,verbose_name="Drone Station")
     make = models.CharField(max_length=100, null=True, blank=True)
     model_no = models.CharField(max_length=30, null=True, blank=True)
     description = models.CharField(max_length=100, null=True, blank=True)

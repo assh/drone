@@ -273,7 +273,7 @@ def launch_drone(request, pk):
 def regRedirect(request):
     return render(request, 'accounts/register_redirect.html')
 
-
+@login_required(login_url='login')
 def testing(request):
 
     if (request.method == 'GET'):
