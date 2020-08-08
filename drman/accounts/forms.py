@@ -23,6 +23,7 @@ class Mission2Form(ModelForm):
 
 class CustomerForm(ModelForm):
     date_end = forms.DateField(widget = DateInput(),required=False)
+
     class Meta:
         model = Customer
         fields = '__all__'

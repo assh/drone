@@ -44,7 +44,7 @@ def customer_list(request):
 @login_required(login_url='login')
 def customer(request, pk):
     customer = Customer.objects.get(id=pk)
-    mission = customer.mission_set.all()
+    mission = customer.mission_set.all().order_by('-mission_id')
     total_mission = mission.count()
     somedict = {'customer': customer, 'missions': mission,
                 'total_mission': total_mission}
