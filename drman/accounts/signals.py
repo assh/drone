@@ -20,7 +20,6 @@ def update_launch(sender, instance, created, **kwargs):
             except:
                 pass
 
-
 @receiver(pre_save, sender=User)
 def set_new_user_inactive(sender, instance, **kwargs):
     if instance._state.adding is True:
@@ -28,3 +27,12 @@ def set_new_user_inactive(sender, instance, **kwargs):
         instance.is_active = False
     else:
         print("Updating User Record")
+
+@receiver(pre_save,sender = Mission)
+def setVerbose(sender,instance,**kwargs):
+    if instance._state.adding is True:
+        #print("P6")
+        instance.vds = instance.state
+        instance.vda = instance.drone
+        instance.vc = instance.customer
+        #print("P7")

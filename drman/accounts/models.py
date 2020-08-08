@@ -149,6 +149,11 @@ class Mission(models.Model):
     mission_pic = models.ImageField(null=True, blank=True, default="logo.png",upload_to='mission_img')
     launch_now = models.BooleanField(null=True, default=False)
 
+
+    vds = models.CharField(max_length = 20, null=True,blank = True)
+    vda = models.CharField(max_length = 200, null=True,blank = True)
+    vc  = models.CharField(max_length = 50, null=True,blank = True)
+    
     def __str__(self):
         return str(self.mission_id)
 

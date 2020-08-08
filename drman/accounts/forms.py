@@ -12,13 +12,14 @@ class MissionForm(ModelForm):
     class Meta:
         model = Mission
         fields = '__all__'
+        exclude = ['vds','vda','vc']
 
 class Mission2Form(ModelForm):
     date = forms.DateField(widget = DateInput())
     class Meta:
         model = Mission
         fields = '__all__'
-        exclude = ['launch_now']
+        exclude = ['launch_now','vds','vda','vc']
         
 
 class CustomerForm(ModelForm):
