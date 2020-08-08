@@ -11,7 +11,7 @@
 			<a class="btn btn-info  btn-sm btn-block" href="{% url 'create-drone' %}">Add Drone</a>
 			<br>
 			<table class="table" id="table_id">
-				<thead class="thead-dark" style="text-align:left">
+				<thead id="btnlaunch" style="text-align:left">
 					<tr>
 						<th scope="col">Drone ID</th>
 						<th scope="col">Station</th>
@@ -36,7 +36,7 @@
 						{% if i.status == 'r' %}
 						<td align="left">Reserved</td>
 						{% endif%}
-						<td align="left"><a class="btn btn-primary  btn-sm" href="{% url 'update-drone' i.id %}">Update Drone</a></td>
+						<td align="left"><a class="btn btn-info btn-sm" href="{% url 'update-drone' i.id %}" id="btnlaunch">Update Drone</a></td>
 					</tr>
 					{% endfor %}
 				</tbody>
