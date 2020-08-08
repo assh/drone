@@ -8,11 +8,13 @@ from functools import partial
 DateInput = partial(forms.DateInput, {'class':'datepicker'})
 
 class MissionForm(ModelForm):
+    date = forms.DateField(widget = DateInput())
     class Meta:
         model = Mission
         fields = '__all__'
 
 class Mission2Form(ModelForm):
+    date = forms.DateField(widget = DateInput())
     class Meta:
         model = Mission
         fields = '__all__'
@@ -20,11 +22,11 @@ class Mission2Form(ModelForm):
         
 
 class CustomerForm(ModelForm):
-    
+    date_end = forms.DateField(widget = DateInput(),required=False)
     class Meta:
         model = Customer
         fields = '__all__'
-        exclude = ['date_start','date_end','date_created']
+        exclude = ['date_start','date_created']
 
 class CreateUser(UserCreationForm):
     class Meta:
@@ -33,8 +35,8 @@ class CreateUser(UserCreationForm):
 
 class DroneForm(ModelForm):
     date_purchase = forms.DateField(widget = DateInput())
-    date_operation = forms.DateField(widget = DateInput())
-    date_shelved = forms.DateField(widget = DateInput())
+    date_operation = forms.DateField(widget = DateInput(),required=False)
+    date_shelved = forms.DateField(widget = DateInput(),required=False)
     class Meta:
         model = Drone
         fields = '__all__'
