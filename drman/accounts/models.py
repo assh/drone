@@ -6,7 +6,7 @@ import csv
 
 class Customer(models.Model):
 
-    customer_id = models.CharField(max_length=50, null=True)
+    customer_id = models.CharField("Customer ID",max_length=50, null=True)
 
     LOAN_STATUS = (
         ('a', 'Active'),
@@ -16,25 +16,25 @@ class Customer(models.Model):
 
     status = models.CharField(
         max_length=1, choices=LOAN_STATUS, blank=True, default='a', null=True)
-    system_access = models.CharField(max_length=4, null=True)
+    sys_access = models.BooleanField("System Access",default=False,null=True)
     zone = models.CharField(max_length=10, null=True)
     first_name = models.CharField(max_length=20, null=True)
     middle_name = models.CharField(max_length=20, null=True, blank=True)
     last_name = models.CharField(max_length=20, null=True)
     phone = models.CharField(max_length=20, null=True)
     email = models.CharField(max_length=200, null=True)
-    company_name = models.CharField(max_length=200, null=True)
-    mobile = models.CharField(max_length=15, null=True, blank=True)
-    line1 = models.CharField(max_length=50, null=True)
-    line2 = models.CharField(max_length=50, null=True)
-    line3 = models.CharField(max_length=50, null=True)
+    company_name = models.CharField("Company Name",max_length=200, null=True)
+    mobile = models.CharField("Mobile Number",max_length=15, null=True, blank=True)
+    line1 = models.CharField("Address Line 1",max_length=50, null=True)
+    line2 = models.CharField("Address Line 2",max_length=50, null=True)
+    line3 = models.CharField("Address Line 3",max_length=50, null=True)
     city = models.CharField(max_length=15, null=True)
     zip_code = models.CharField(max_length=20, null=True)
     state = models.CharField(max_length=20, null=True)
     country = models.CharField(max_length=50, null=True)
-    date_created = models.DateField(auto_now=True, null=True,blank=True)
-    date_start = models.DateField(auto_now=True, null=True,blank=True)
-    date_end = models.DateField(auto_now_add=False, null=True,blank=True)
+    date_created = models.DateField("Date Created",auto_now=True, null=True,blank=True)
+    date_start = models.DateField("Date Started",auto_now=True, null=True,blank=True)
+    date_end = models.DateField("Date Ended",auto_now_add=False, null=True,blank=True)
 
     def __str__(self):
         return f'{self.customer_id}'
