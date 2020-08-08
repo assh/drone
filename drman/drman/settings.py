@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =  True #os.environ.get('DEBUG_VALUE')
 
-ALLOWED_HOSTS = ['drone-asish.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['drone-asish.herokuapp.com','127.0.0.1','*','192.168.0.154']
 
 
 # Application definition
