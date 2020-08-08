@@ -203,7 +203,7 @@ def createDrone(request):
         form = DroneForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('drone')
     context = {
         'form': form,
     }
@@ -219,7 +219,7 @@ def updateDrone(request, pk):
         form = DroneForm(request.POST, instance=drone)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('drone')
     context = {'form': form}
     return render(request, 'accounts/drone_form.html', context)
 

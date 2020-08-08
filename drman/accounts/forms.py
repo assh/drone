@@ -3,7 +3,9 @@ from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
+from functools import partial
 
+DateInput = partial(forms.DateInput, {'class':'datepicker'})
 
 class MissionForm(ModelForm):
     class Meta:
@@ -30,6 +32,9 @@ class CreateUser(UserCreationForm):
         fields=['username','email','password1','password2']
 
 class DroneForm(ModelForm):
+    date_purchase = forms.DateField(widget = DateInput())
+    date_operation = forms.DateField(widget = DateInput())
+    date_shelved = forms.DateField(widget = DateInput())
     class Meta:
         model = Drone
         fields = '__all__'
