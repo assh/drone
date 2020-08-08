@@ -6,7 +6,7 @@ import csv
 
 class Customer(models.Model):
 
-    customer_id = models.CharField(max_length=50, null=True)
+    customer_id = models.CharField("Customer ID",max_length=50, null=True)
 
     LOAN_STATUS = (
         ('a', 'Active'),
@@ -16,25 +16,25 @@ class Customer(models.Model):
 
     status = models.CharField(
         max_length=1, choices=LOAN_STATUS, blank=True, default='a', null=True)
-    system_access = models.CharField(max_length=4, null=True)
+    sys_access = models.BooleanField("System Access",default=False,null=True)
     zone = models.CharField(max_length=10, null=True)
     first_name = models.CharField(max_length=20, null=True)
     middle_name = models.CharField(max_length=20, null=True, blank=True)
     last_name = models.CharField(max_length=20, null=True)
     phone = models.CharField(max_length=20, null=True)
     email = models.CharField(max_length=200, null=True)
-    company_name = models.CharField(max_length=200, null=True)
-    mobile = models.CharField(max_length=15, null=True, blank=True)
-    line1 = models.CharField(max_length=50, null=True)
-    line2 = models.CharField(max_length=50, null=True)
-    line3 = models.CharField(max_length=50, null=True)
+    company_name = models.CharField("Company Name",max_length=200, null=True)
+    mobile = models.CharField("Mobile Number",max_length=15, null=True, blank=True)
+    line1 = models.CharField("Address Line 1",max_length=50, null=True)
+    line2 = models.CharField("Address Line 2",max_length=50, null=True)
+    line3 = models.CharField("Address Line 3",max_length=50, null=True)
     city = models.CharField(max_length=15, null=True)
     zip_code = models.CharField(max_length=20, null=True)
     state = models.CharField(max_length=20, null=True)
     country = models.CharField(max_length=50, null=True)
-    date_created = models.DateField(auto_now=True, null=True,blank=True)
-    date_start = models.DateField(auto_now=True, null=True,blank=True)
-    date_end = models.DateField(auto_now_add=False, null=True,blank=True)
+    date_created = models.DateField("Date Created",auto_now=True, null=True,blank=True)
+    date_start = models.DateField("Date Started",auto_now=True, null=True,blank=True)
+    date_end = models.DateField("Date Ended",auto_now_add=False, null=True,blank=True)
 
     def __str__(self):
         return f'{self.customer_id}'
@@ -65,7 +65,7 @@ class Location(models.Model):
 
 class Drone(models.Model):
 
-    droneid = models.CharField(max_length=200, null=True)
+    droneid = models.CharField("Drone ID",max_length=200, null=True)
     LOAN_STATUS = (
         ('m', 'Maintenance'),
         ('o', 'On loan'),
@@ -75,7 +75,7 @@ class Drone(models.Model):
 
     status = models.CharField(
         max_length=1, choices=LOAN_STATUS, blank=True, default='m', null=True)
-    locale = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
+    locale = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL,verbose_name="Drone Station")
     make = models.CharField(max_length=100, null=True, blank=True)
     model_no = models.CharField(max_length=30, null=True, blank=True)
     description = models.CharField(max_length=100, null=True, blank=True)
@@ -149,6 +149,11 @@ class Mission(models.Model):
     mission_pic = models.ImageField(null=True, blank=True, default="logo.png",upload_to='mission_img')
     launch_now = models.BooleanField(null=True, default=False)
 
+
+    vds = models.CharField(max_length = 20, null=True,blank = True)
+    vda = models.CharField(max_length = 200, null=True,blank = True)
+    vc  = models.CharField(max_length = 50, null=True,blank = True)
+    
     def __str__(self):
         return str(self.mission_id)
 
@@ -160,97 +165,3 @@ class Launch(models.Model):
 
     def __str__(self):
         return self.mission
-
-
-class CSVFileFolder(models.Model):
-
-    csf_file = models.FileField(upload_to='csvfodler')
-
-    def save(self, *args, **kwargs):
-        """
-        This is where you analyze the CSV file and update 
-        Category and Product models' data
-        """
-        super(CSVFileFolder, self).save(*args, **kwargs)
-        self.csv_file.open(mode='rb')
-        f = csv.reader(self.csv_file)
-        for row in f:
-            # currently the row is a list of all fields in CSV file
-            # change it to a dict for ease
-            #row_dict = self.row_to_dict(row) # this method is defined below
-            # check if product exists in db
-            mission = self.product_is_in_db(row['\ufeffmission_id']) # this method is defined below
-            if mission:
-                # product is in db
-                # update fields values
-                self.update_product(mission, row) # this method is defined below
-            else:
-                # product is not in db
-                # create this product
-                self.create_product(row) # this method is defined below
-
-        self.csv_file.close()
-
-
-    def row_to_dict(self, row):
-        """Returns the given row in a dict format"""
-        # Here's how the row list looks like:
-        # ['category', 'product name', 'product uid' 'price', 'qty']
-        return {'category': row[0], 'name': row[1], 
-            'uid': row[2], 'price': row[3], 'qty': row[4]
-            }
-
-    def product_is_in_db(self, uid):
-        """Check the product is in db. 
-        If yes, return the product, else return None
-        """
-        try:
-            return Mission.objects.get(mission_id=uid)
-        except Mission.DoesNotExist:
-            return None
-
-    def update_product(self, mission, row):
-        """Update the given product with new data in row_dict"""
-        mission.mission_id = row['mission_id']
-        #mission.state = row['state']
-        #mission.drone = row['drone']
-        mission.mission_type = row['mission_type']
-        mission.date = row['date']
-        mission.time = row['time']
-        mission.mission_status = row['mission_status']
-        mission.mode_type = row['mode_type']
-        #mission.customer = row['customer']
-        mission.save()
-
-    def create_product(self, row_dict):
-        # First see, if category exists
-        # If not, create a new category
-        try:
-            state = Location.objects.get(row['state'])
-        except Location.DoesNotExist:
-            state = None
-        try:
-            drone = Drone.objects.get(row['drone'])
-        except Drone.DoesNotExist:
-            drone = None
-        
-        try:
-            customer = Customer.objects.get(row['customer'])
-        except Customer.DoesNotExist:
-            customer = None
-
-
-
-        # Now, create the product
-        Mission.objects.create(
-            mission_id = row['mission_id'],
-            state = row['state'],
-            drone = row['drone'],
-            mission_type = row['mission_type'],
-            date = row['date'],
-            time = row['time'],
-            mission_status = row['mission_status'],
-            mode_type = row['mode_type'],
-            customer = row['customer'],
-        )
-        print("uPDATING")

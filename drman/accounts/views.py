@@ -16,17 +16,12 @@ from datetime import datetime, timedelta
 @login_required(login_url='login')
 # @allowed_user(allowed=['admin'])
 def home(request):
-    customer = Customer.objects.all()[0:5]
-    mission = Mission.objects.all().order_by('-mission_id')[0:5]
+    customer = Customer.objects.values()[0:10]
+    mission = Mission.objects.order_by('-mission_id').values()[0:10]
     context = {
         'customer': customer,
         # 'mymission':mymission,
         'mission': mission,
-        'total_drone': Drone.objects.all().count(),
-        'maintenance_drone': Drone.objects.filter(status="m").count(),
-        'mission_complete': Mission.objects.filter(mission_status="Complete").count(),
-        'mission_pending': Mission.objects.filter(mission_status="Pending").count(),
-        'mission_cancelled': Mission.objects.filter(mission_status="Cancelled").count(),
     }
     return render(request, 'accounts/dashboard.html', context)
 
@@ -49,7 +44,7 @@ def customer_list(request):
 @login_required(login_url='login')
 def customer(request, pk):
     customer = Customer.objects.get(id=pk)
-    mission = customer.mission_set.all()
+    mission = customer.mission_set.all().order_by('-mission_id')
     total_mission = mission.count()
     somedict = {'customer': customer, 'missions': mission,
                 'total_mission': total_mission}
@@ -208,7 +203,7 @@ def createDrone(request):
         form = DroneForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('drone')
     context = {
         'form': form,
     }
@@ -224,7 +219,7 @@ def updateDrone(request, pk):
         form = DroneForm(request.POST, instance=drone)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('drone')
     context = {'form': form}
     return render(request, 'accounts/drone_form.html', context)
 
@@ -273,7 +268,7 @@ def launch_drone(request, pk):
 def regRedirect(request):
     return render(request, 'accounts/register_redirect.html')
 
-
+@login_required(login_url='login')
 def testing(request):
 
     if (request.method == 'GET'):

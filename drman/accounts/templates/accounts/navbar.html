@@ -16,11 +16,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="{% url 'main-home' %}">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="{% url 'drone' %}">Drones</a>
-        <a class="nav-item nav-link" href="{% url 'customer-list' %}">Customers</a>
-        <a class="nav-item nav-link" href="{% url 'all-mission' %}">Missions</a>
-        <a class="nav-item nav-link" href="{% url 'status' %}">Missions Statistics</a>
+        <a class="nav-item nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'main-home' %}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link {% if request.path == '/about/' %}active{% endif %}" href="{% url 'drone' %}">Drones</a>
+        <a class="nav-item nav-link {% if request.path == '/customer_list/' %}active{% endif %}" href="{% url 'customer-list' %}">Customers</a>
+        <a class="nav-item nav-link {% if request.path == '/mission/' %}active{% endif %}" href="{% url 'all-mission' %}">Missions</a>
+        <a class="nav-item nav-link {% if request.path == '/statistics/' %}active{% endif %}" href="{% url 'status' %}">Missions Statistics</a>
 
 
       </div>
