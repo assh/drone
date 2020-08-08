@@ -26,8 +26,8 @@
     {% for mission in missions %}
     <tr>
       <td align="left"><a href="{% url 'launch' mission.id %}">{{mission.mission_id}}</a></td>
-      <td align="left">{{mission.state}}</td>
-      <td align="left">{{mission.drone}}</td>
+      <td align="left">{{mission.vds}}</td>
+      <td align="left">{{mission.vda}}</td>
 
       {% if mission.mission_type == '1' %}
       <td align="left">Loiter</td>
@@ -43,11 +43,11 @@
 
       <td align="left">Video</td>
       {% endif %}
-      <td align="left">{{mission.date_future|date:"d/m/y"}}</td>
-      <td align="left">{{mission.date_future|date:"H:i:s"}}</td>
+      <td align="left">{{mission.date|date:"d/m/y"}}</td>
+      <td align="left">{{mission.time|date:"H:i:s"}}</td>
       <td align="left">{{mission.mission_status}}
 
-      <td align="left">{{mission.customer.name}}
+      <td align="left">{{mission.vc}}
         {% if mission.launch_mode == 'MANUAL' and mission.launch_now == False %}
       <td align="center"><a type="button" class="btn btn-sm" href="{% url 'launch-drone' mission.id%}" id ="btnlaunch">MANUAL</a></td>
       {% endif %}
@@ -65,28 +65,6 @@
 </div>
 
 
-
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Are you sure you want to <b>Launch</b>?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Please make sure you comply with local rules and regulations and take into account local weather conditions.
-        <b>Failure to comply with these rules may result in significant financial and/or legal consequences.</b>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Launch</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 {% endblock %}
