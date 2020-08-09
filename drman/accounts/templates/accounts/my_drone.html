@@ -5,63 +5,63 @@
 <div class="container">
     <div class="card card-body">
 
-        <form action="" method="POST">
-            {{form|crispy}}
+        <form action="" method="">
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                    {{form.droneid|as_crispy_field}}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    {{form.model_no|as_crispy_field}}
+                </div>
+            </div>
+            <hr>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-0">
+                    {{form.description|as_crispy_field}}
+                </div>
+                <div class="form-group col-md-4 mb-0">
+                    {{form.make|as_crispy_field}}
+                </div>
+                <div class="form-group col-md-4 mb-0">
+                    {{form.ean|as_crispy_field}}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                    {{form.status|as_crispy_field}}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    {{form.warranty|as_crispy_field}}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-0">
+                    {{form.price_currency|as_crispy_field}}
+                </div>
+                <div class="form-group col-md-4 mb-0">
+                    {{form.price|as_crispy_field}}
+                </div>
+                <div class="form-group col-md-4 mb-0">
+                    {{form.locale|as_crispy_field}}
+                </div>
+            </div>
+            <hr>
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-0">
+                    {{form.date_purchase|as_crispy_field}}
+                </div>
+                <div class="form-group col-md-4 mb-0">
+                    {{form.date_operation|as_crispy_field}}
+                </div>
+                <div class="form-group col-md-4 mb-0">
+                    {{form.date_shelved|as_crispy_field}}
+                </div>
+            </div>
         </form>
-        <!-- <div class="row">
-            <div class="col col-md mx-5 my-2">
-                <h4>Drone ID: </h4>
-            </div>
-            <div class="col col-md mx-5 my-2">
-                <h4>{{drone.droneid}}</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-md mx-5 my-2">
-                <h4>Drone Status:</h4>
-            </div>
-            <div class="col col-md mx-5 my-2">
-                {% if drone.status == 'm' %}
-                <td align="left">
-                    <h4>Maintenance</h4>
-                </td>
-                {% endif%}
-                {% if drone.status == 'o' %}
-                <td align="left">
-                    <h4>On Loan</h4>
-                </td>
-                {% endif%}
-                {% if drone.status == 'a' %}
-                <td align="left">
-                    <h4>Available</h4>
-                </td>
-                {% endif%}
-                {% if drone.status == 'r' %}
-                <td align="left">
-                    <h4>Reserved</h4>
-                </td>
-                {% endif%}
-            </div>
-            
-        </div>
-
-        <div class="row">
-            <div class="col col-md mx-5 my-2">
-                <h4>Drone Station: </h4>
-            </div>
-            <div class="col col-md mx-5 my-2">
-                <h4>{{drone.locale}}</h4>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col col-md mx-5 my-2">
-                <h4>Drone ID: </h4>
-            </div>
-            <div class="col col-md mx-5 my-2">
-                <h4>{{drone.droneid}}</h4>
-            </div>
-        </div> -->
     </div>
 </div>
 

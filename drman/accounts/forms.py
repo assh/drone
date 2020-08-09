@@ -50,6 +50,17 @@ class MyDroneForm(ModelForm):
         widgets = {
         'droneid': forms.TextInput(attrs={'disabled': 'true'}),
         'status': forms.TextInput(attrs={'disabled': 'true'}),
+        'locale': forms.TextInput(attrs={'disabled': 'true'}),
+        'make': forms.TextInput(attrs={'disabled': 'true'}),
+        'model_no': forms.TextInput(attrs={'disabled': 'true'}),
+        'description': forms.TextInput(attrs={'disabled': 'true'}),
+        'ean': forms.TextInput(attrs={'disabled': 'true'}),
+        'price_currency': forms.TextInput(attrs={'disabled': 'true'}),
+        'price': forms.TextInput(attrs={'disabled': 'true'}),
+        'warranty': forms.TextInput(attrs={'disabled': 'true'}),
+        'date_purchase': forms.TextInput(attrs={'disabled': 'true'}),
+        'date_operation': forms.TextInput(attrs={'disabled': 'true'}),
+        'date_shelved': forms.TextInput(attrs={'disabled': 'true'}),
     }
 
 class LaunchForm(ModelForm):
