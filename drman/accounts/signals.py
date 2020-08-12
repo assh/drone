@@ -35,4 +35,5 @@ def setVerbose(sender,instance,**kwargs):
         instance.vds = instance.state
         instance.vda = instance.drone
         instance.vc = instance.customer
+        instance.vm = instance.manager
         #print("P7")

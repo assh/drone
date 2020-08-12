@@ -57,7 +57,7 @@ def is_valid(user):
 
 @login_required(login_url='login')
 def mission(request):
-    one_week_ago = datetime.today() - timedelta(days=7)
+    #one_week_ago = datetime.today() - timedelta(days=7)
     #mission = Mission.objects.order_by('-mission_id')[0:50]
     mission = Mission.objects.order_by('-mission_id').values()
     #myFilter = MissionFilter(request.GET, queryset=mission)

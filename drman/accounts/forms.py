@@ -23,7 +23,7 @@ class Mission2Form(ModelForm):
         
 
 class CustomerForm(ModelForm):
-    date_end = forms.DateField(widget = DateInput(),required=False)
+    date_end = forms.DateField(widget = DateInput(),required=False,label="Date of Expiry")
 
     class Meta:
         model = Customer
@@ -36,14 +36,19 @@ class CreateUser(UserCreationForm):
         fields=['username','email','password1','password2']
 
 class DroneForm(ModelForm):
-    date_purchase = forms.DateField(widget = DateInput())
-    date_operation = forms.DateField(widget = DateInput(),required=False)
-    date_shelved = forms.DateField(widget = DateInput(),required=False)
+    required_css_class = 'required'
+    date_purchase = forms.DateField(widget = DateInput(),label="Date of Purchase")
+    date_operation = forms.DateField(widget = DateInput(),required=False,label="Date Operation Started")
+    date_shelved = forms.DateField(widget = DateInput(),required=False,label="Date Shelved")
     class Meta:
         model = Drone
         fields = '__all__'
 
 class MyDroneForm(ModelForm):
+    required_css_class = 'required'
+    date_purchase = forms.DateField(label="Date of Purchase")
+    date_operation = forms.DateField(label="Date Operation Started")
+    date_shelved = forms.DateField(label="Date Shelved")
     class Meta:
         model = Drone
         fields = '__all__'
