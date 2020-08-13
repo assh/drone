@@ -1,6 +1,6 @@
 {% extends 'accounts/main.html' %}
 {% load static %}
-
+{% load thumbnail %}
 {% block content %}
 <div class="container">
     <div class="row">
@@ -89,9 +89,12 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">MAP</h5>
+                {% thumbnail mission.mission_pic "500x500" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                {% endthumbnail %}
                 <!-- <img src="{{mission.mission_pic.url}}"> -->
-                <p class="card-text">This is were the map will be
-                    displayed............................................................................</p>
+                <!-- <p class="card-text">This is were the map will be
+                    displayed............................................................................</p> -->
             </div>
         </div>
     </div>
