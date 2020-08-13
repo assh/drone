@@ -23,7 +23,7 @@ class Customer(models.Model):
         "Middle Name", max_length=20, null=True, blank=True)
     last_name = models.CharField("Last Name", max_length=20, null=True)
     phone = models.CharField(max_length=20, null=True)
-    email = models.CharField(max_length=200, null=True)
+    email = models.EmailField(null=True)
     company_name = models.CharField("Company Name", max_length=200, null=True)
     mobile = models.CharField(
         "Mobile Number", max_length=15, null=True, blank=True)
@@ -51,7 +51,7 @@ class Location(models.Model):
     station_name = models.CharField(max_length=100, null=True)
     manager = models.ManyToManyField(User)
     phone = models.CharField(max_length=15, null=True)
-    email = models.CharField(max_length=30, null=True)
+    email = models.EmailField(null=True)
     line_1 = models.CharField(max_length=50, null=True)
     line_2 = models.CharField(max_length=50, null=True)
     line_3 = models.CharField(max_length=50, null=True)
