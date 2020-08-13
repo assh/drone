@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+#from django.http import HttpResponse
 from .models import *
 from .forms import *
 from .filters import MissionFilter
@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required, permission_required, 
 from .decorators import unauthenticated_user
 import csv
 import io
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 @login_required(login_url='login')
@@ -57,9 +57,9 @@ def is_valid(user):
 
 @login_required(login_url='login')
 def mission(request):
-    one_week_ago = datetime.today() - timedelta(days=7)
+    #one_week_ago = datetime.today() - timedelta(days=7)
     #mission = Mission.objects.order_by('-mission_id')[0:50]
-    mission = Mission.objects.order_by('-mission_id').values()
+    mission = Mission.objects.order_by('mission_id').values()
     #myFilter = MissionFilter(request.GET, queryset=mission)
     #mission = myFilter.qs
     context = {
