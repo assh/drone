@@ -46,17 +46,5 @@ def setVerbose(sender,instance,**kwargs):
         instance.vm = str(instance.manager)
         print("P9")
 
-#@receiver(post_save,sender = Mission)
-def updateVerbose(sender, instance, created, **kwargs):
-    print("p7")
-    if created == False:
-        print("p8")
-        instance.vds = Location.objects.get(location_id=instance.state)
-        instance.vda = instance.drone
-        instance.vc = instance.customer
-        instance.vm = instance.manager
-        print("p9")
-        instance.save()
-        print("p10")
 
     
