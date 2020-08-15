@@ -32,7 +32,7 @@ def about(request):
 
 @login_required(login_url='login')
 def customer_list(request):
-    customer = Customer.objects.all()
+    customer = Customer.objects.values()
     context = {
         'customers': customer
     }
@@ -222,10 +222,7 @@ def updateDrone(request, pk):
 def mymission(request):
 
     mission = Mission.objects.all().filter(manager=request.user)
-    myFilter = MissionFilter(request.GET, queryset=mission)
-    mission = myFilter.qs
     context = {
-        'myFilter': myFilter,
         'missions': mission,
     }
     return render(request, 'accounts/mymission.html', context)
