@@ -232,9 +232,11 @@ def mymission(request):
 def my_drone(request, pk):
 
     drone = Drone.objects.get(id=pk)
+    drone_info = drone.mission_set.values()
     form = MyDroneForm(instance=drone)
     context = {
         'drone': drone,
+        'drone_info': drone_info,
         'form': form,
     }
     return render(request, 'accounts/my_drone.html', context)

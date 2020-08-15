@@ -47,9 +47,9 @@ class DroneForm(ModelForm):
 
 class MyDroneForm(ModelForm):
     required_css_class = 'required'
-    date_purchase = forms.DateField(label="Date of Purchase")
-    date_operation = forms.DateField(label="Date Operation Started")
-    date_shelved = forms.DateField(label="Date Shelved")
+    #date_purchase = forms.DateField(label="Date of Purchase")
+    #date_operation = forms.DateField(label="Date Operation Started")
+    #date_shelved = forms.DateField(label="Date Shelved")
     class Meta:
         model = Drone
         fields = '__all__'
