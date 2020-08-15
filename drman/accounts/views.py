@@ -26,7 +26,7 @@ def home(request):
 
 @login_required(login_url='login')
 def about(request):
-    dr = Drone.objects.all()
+    dr = Drone.objects.values()
     return render(request, 'accounts/about.html', {'drones': dr})
 
 

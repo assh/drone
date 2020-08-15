@@ -46,5 +46,15 @@ def setVerbose(sender,instance,**kwargs):
         instance.vm = str(instance.manager)
         print("P9")
 
-
+@receiver(pre_save,sender = Drone)
+def setDroneVerbose(sender,instance,**kwargs):
+    print("P7")
+    if instance._state.adding is True:
+        print("P6")
+        instance.vl = instance.locale
+        print("P7")
+    else:
+        print("P8")
+        instance.vl = str(instance.locale)
+        print("P9")
     
