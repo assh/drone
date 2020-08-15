@@ -65,7 +65,7 @@ class Location(models.Model):
     altitude = models.IntegerField(null=True)
 
     def __str__(self):
-        return self.location_id
+        return str(self.location_id)
 
 
 class Drone(models.Model):
