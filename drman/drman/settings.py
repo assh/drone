@@ -167,4 +167,3 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_QUERYSTRING_AUTH = False
 
 THUMBNAIL_FORCE_OVERWRITE = True
-#django_heroku.settings(locals())
