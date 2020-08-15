@@ -65,7 +65,7 @@ class Location(models.Model):
     altitude = models.IntegerField(null=True)
 
     def __str__(self):
-        return self.location_id
+        return str(self.location_id)
 
 
 class Drone(models.Model):
@@ -97,6 +97,7 @@ class Drone(models.Model):
     date_shelved = models.DateField(
         auto_now_add=False, auto_now=False, null=True, blank=True)
 
+    vl = models.CharField(max_length=25,null=True,blank=True)
     def __str__(self):
         return self.droneid
 

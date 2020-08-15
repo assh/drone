@@ -14,13 +14,11 @@ from datetime import datetime
 
 
 @login_required(login_url='login')
-# @allowed_user(allowed=['admin'])
 def home(request):
     customer = Customer.objects.values()[0:10]
     mission = Mission.objects.order_by('-mission_id').values()[0:10]
     context = {
         'customer': customer,
-        # 'mymission':mymission,
         'mission': mission,
     }
     return render(request, 'accounts/dashboard.html', context)
@@ -28,13 +26,13 @@ def home(request):
 
 @login_required(login_url='login')
 def about(request):
-    dr = Drone.objects.all()
+    dr = Drone.objects.values()
     return render(request, 'accounts/about.html', {'drones': dr})
 
 
 @login_required(login_url='login')
 def customer_list(request):
-    customer = Customer.objects.all()
+    customer = Customer.objects.values()
     context = {
         'customers': customer
     }
@@ -60,10 +58,7 @@ def mission(request):
     #one_week_ago = datetime.today() - timedelta(days=7)
     #mission = Mission.objects.order_by('-mission_id')[0:50]
     mission = Mission.objects.order_by('mission_id').values()
-    #myFilter = MissionFilter(request.GET, queryset=mission)
-    #mission = myFilter.qs
     context = {
-        #'myFilter': myFilter,
         'missions': mission,
     }
     return render(request, 'accounts/allorder.html', context)
@@ -117,7 +112,6 @@ def status(request):
     mission = Mission.objects.all()
     context = {
         'customer': customer,
-        # 'mymission':mymission,
         'mission': mission,
         'total_missions': Mission.objects.all().count(),
         'total_drone': Drone.objects.all().count(),
@@ -228,10 +222,7 @@ def updateDrone(request, pk):
 def mymission(request):
 
     mission = Mission.objects.all().filter(manager=request.user)
-    myFilter = MissionFilter(request.GET, queryset=mission)
-    mission = myFilter.qs
     context = {
-        'myFilter': myFilter,
         'missions': mission,
     }
     return render(request, 'accounts/mymission.html', context)
