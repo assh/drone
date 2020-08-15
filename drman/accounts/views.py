@@ -42,7 +42,7 @@ def customer_list(request):
 @login_required(login_url='login')
 def customer(request, pk):
     customer = Customer.objects.get(id=pk)
-    mission = customer.mission_set.all().order_by('-mission_id')
+    mission = customer.mission_set.values().order_by('-mission_id')
     total_mission = mission.count()
     somedict = {'customer': customer, 'missions': mission,
                 'total_mission': total_mission}
@@ -113,15 +113,15 @@ def status(request):
     context = {
         'customer': customer,
         'mission': mission,
-        'total_missions': Mission.objects.all().count(),
+        'total_missions': mission.count(),
         'total_drone': Drone.objects.all().count(),
         'maintenance_drone': Drone.objects.filter(status="m").count(),
         'onloan_drone': Drone.objects.filter(status="o").count(),
         'available_drone': Drone.objects.filter(status="a").count(),
         'reserved_drone': Drone.objects.filter(status="r").count(),
-        'mission_complete': Mission.objects.filter(mission_status="Complete").count(),
-        'mission_pending': Mission.objects.filter(mission_status="Pending").count(),
-        'mission_cancelled': Mission.objects.filter(mission_status="Cancelled").count(),
+        'mission_complete': mission.filter(mission_status="Complete").count(),
+        'mission_pending': mission.filter(mission_status="Pending").count(),
+        'mission_cancelled': mission.filter(mission_status="Cancelled").count(),
     }
     return render(request, 'accounts/status.html', context)
 
@@ -232,9 +232,11 @@ def mymission(request):
 def my_drone(request, pk):
 
     drone = Drone.objects.get(id=pk)
+    drone_info = drone.mission_set.values()
     form = MyDroneForm(instance=drone)
     context = {
         'drone': drone,
+        'drone_info': drone_info,
         'form': form,
     }
     return render(request, 'accounts/my_drone.html', context)
