@@ -23,7 +23,7 @@ class Mission2Form(ModelForm):
         
 
 class CustomerForm(ModelForm):
-    date_end = forms.DateField(widget = DateInput(),required=False)
+    date_end = forms.DateField(widget = DateInput(),required=False,label="Date of Expiry")
 
     class Meta:
         model = Customer
@@ -36,20 +36,38 @@ class CreateUser(UserCreationForm):
         fields=['username','email','password1','password2']
 
 class DroneForm(ModelForm):
-    date_purchase = forms.DateField(widget = DateInput())
-    date_operation = forms.DateField(widget = DateInput(),required=False)
-    date_shelved = forms.DateField(widget = DateInput(),required=False)
+    required_css_class = 'required'
+    date_purchase = forms.DateField(widget = DateInput(),label="Date of Purchase")
+    date_operation = forms.DateField(widget = DateInput(),required=False,label="Date Operation Started")
+    date_shelved = forms.DateField(widget = DateInput(),required=False,label="Date Shelved")
     class Meta:
         model = Drone
         fields = '__all__'
+        exclude = ['vl']
 
 class MyDroneForm(ModelForm):
+    required_css_class = 'required'
+    date_purchase = forms.DateField(label="Date of Purchase")
+    date_operation = forms.DateField(label="Date Operation Started")
+    date_shelved = forms.DateField(label="Date Shelved")
     class Meta:
         model = Drone
         fields = '__all__'
+        exclude = ['vl']
         widgets = {
         'droneid': forms.TextInput(attrs={'disabled': 'true'}),
         'status': forms.TextInput(attrs={'disabled': 'true'}),
+        'locale': forms.TextInput(attrs={'disabled': 'true'}),
+        'make': forms.TextInput(attrs={'disabled': 'true'}),
+        'model_no': forms.TextInput(attrs={'disabled': 'true'}),
+        'description': forms.TextInput(attrs={'disabled': 'true'}),
+        'ean': forms.TextInput(attrs={'disabled': 'true'}),
+        'price_currency': forms.TextInput(attrs={'disabled': 'true'}),
+        'price': forms.TextInput(attrs={'disabled': 'true'}),
+        'warranty': forms.TextInput(attrs={'disabled': 'true'}),
+        'date_purchase': forms.TextInput(attrs={'disabled': 'true'}),
+        'date_operation': forms.TextInput(attrs={'disabled': 'true'}),
+        'date_shelved': forms.TextInput(attrs={'disabled': 'true'}),
     }
 
 class LaunchForm(ModelForm):

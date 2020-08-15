@@ -30,9 +30,31 @@ def set_new_user_inactive(sender, instance, **kwargs):
 
 @receiver(pre_save,sender = Mission)
 def setVerbose(sender,instance,**kwargs):
+    print("P7")
     if instance._state.adding is True:
-        #print("P6")
+        print("P6")
         instance.vds = instance.state
         instance.vda = instance.drone
         instance.vc = instance.customer
-        #print("P7")
+        instance.vm = instance.manager
+        print("P7")
+    else:
+        print("P8")
+        instance.vds = str(instance.state)
+        instance.vda = str(instance.drone)
+        instance.vc = str(instance.customer)
+        instance.vm = str(instance.manager)
+        print("P9")
+
+@receiver(pre_save,sender = Drone)
+def setDroneVerbose(sender,instance,**kwargs):
+    print("P7")
+    if instance._state.adding is True:
+        print("P6")
+        instance.vl = instance.locale
+        print("P7")
+    else:
+        print("P8")
+        instance.vl = str(instance.locale)
+        print("P9")
+    

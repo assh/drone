@@ -1,6 +1,6 @@
 {% extends 'accounts/main.html' %}
 {% load static %}
-
+{% load thumbnail %}
 {% block content %}
 <div class="container">
     <div class="row">
@@ -8,14 +8,14 @@
 
         <div class="card">
             <div class="card-body">
-                <h2 class=" card text-light card-title text-center" id="headlaunch">Mission Details</h2>
+                <h2 class=" card text-light card-title text-center pb-1" id="headlaunch">Mission Details</h2>
                 <br>
                 <div class="row">
                     <div class="col-md mx-5 my-2">
                         <h4>Mission ID:</h4>
                     </div>
                     <div class="col-md text-center">
-                        <h4>{{mission.mission_id}}</h4>
+                        <h5>{{mission.mission_id}}</h5>
                     </div>
                 </div>
                 <div class="row">
@@ -66,11 +66,11 @@
                         <h4>{{mission.manager}}</h4>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md mx-5 my-2">
                     <a href="{{mission.mission_pic.url}}">Mission Image</a>
                 </div>
-                </div>
+                </div> -->
                 <br>
                 <div class="row">
                     <div class="col-md">
@@ -88,10 +88,13 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">MAP</h5>
+                <h5 class="card-title">Mission Map</h5>
+                {% thumbnail mission.mission_pic "500x500" crop="center" as im %}
+                    <a href="{{ im.url }}"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>
+                {% endthumbnail %}
                 <!-- <img src="{{mission.mission_pic.url}}"> -->
-                <p class="card-text">This is were the map will be
-                    displayed............................................................................</p>
+                <!-- <p class="card-text">This is were the map will be
+                    displayed............................................................................</p> -->
             </div>
         </div>
     </div>

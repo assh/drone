@@ -2,7 +2,7 @@
 
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
 <div class="row">
 	<div class="col">
 		<h5 class="text-center">Drone Info</h5>
@@ -16,6 +16,7 @@
 						<th scope="col">Drone ID</th>
 						<th scope="col">Station</th>
 						<th scope="col">Status</th>
+						<th scope="col">Model No.</th>
 						<th scope="col">Update</th>
 					</tr>
 				</thead>
@@ -23,7 +24,7 @@
 					{% for i in drones %}
 					<tr>
 						<td align="left"><a href="{% url 'my-drone' i.id %}">{{i.droneid}}</a></td>
-						<td align="left">{{i.locale}}</td>
+						<td align="left">{{i.vl}}</td>
 						{% if i.status == 'm' %}
 						<td align="left">Maintenance</td>
 						{% endif%}
@@ -36,6 +37,7 @@
 						{% if i.status == 'r' %}
 						<td align="left">Reserved</td>
 						{% endif%}
+						<td align="left">{{i.model_no}}</td>
 						<td align="left"><a class="btn btn-info btn-sm" href="{% url 'update-drone' i.id %}" id="btnlaunch">Update Drone</a></td>
 					</tr>
 					{% endfor %}

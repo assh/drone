@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+#from django.http import HttpResponse
 from .models import *
 from .forms import *
 from .filters import MissionFilter
@@ -10,17 +10,15 @@ from django.contrib.auth.decorators import login_required, permission_required, 
 from .decorators import unauthenticated_user
 import csv
 import io
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 @login_required(login_url='login')
-# @allowed_user(allowed=['admin'])
 def home(request):
     customer = Customer.objects.values()[0:10]
     mission = Mission.objects.order_by('-mission_id').values()[0:10]
     context = {
         'customer': customer,
-        # 'mymission':mymission,
         'mission': mission,
     }
     return render(request, 'accounts/dashboard.html', context)
@@ -28,13 +26,13 @@ def home(request):
 
 @login_required(login_url='login')
 def about(request):
-    dr = Drone.objects.all()
+    dr = Drone.objects.values()
     return render(request, 'accounts/about.html', {'drones': dr})
 
 
 @login_required(login_url='login')
 def customer_list(request):
-    customer = Customer.objects.all()
+    customer = Customer.objects.values()
     context = {
         'customers': customer
     }
@@ -57,13 +55,10 @@ def is_valid(user):
 
 @login_required(login_url='login')
 def mission(request):
-    one_week_ago = datetime.today() - timedelta(days=7)
+    #one_week_ago = datetime.today() - timedelta(days=7)
     #mission = Mission.objects.order_by('-mission_id')[0:50]
-    mission = Mission.objects.order_by('-mission_id').values()
-    #myFilter = MissionFilter(request.GET, queryset=mission)
-    #mission = myFilter.qs
+    mission = Mission.objects.order_by('mission_id').values()
     context = {
-        #'myFilter': myFilter,
         'missions': mission,
     }
     return render(request, 'accounts/allorder.html', context)
@@ -117,7 +112,6 @@ def status(request):
     mission = Mission.objects.all()
     context = {
         'customer': customer,
-        # 'mymission':mymission,
         'mission': mission,
         'total_missions': Mission.objects.all().count(),
         'total_drone': Drone.objects.all().count(),
@@ -228,10 +222,7 @@ def updateDrone(request, pk):
 def mymission(request):
 
     mission = Mission.objects.all().filter(manager=request.user)
-    myFilter = MissionFilter(request.GET, queryset=mission)
-    mission = myFilter.qs
     context = {
-        'myFilter': myFilter,
         'missions': mission,
     }
     return render(request, 'accounts/mymission.html', context)

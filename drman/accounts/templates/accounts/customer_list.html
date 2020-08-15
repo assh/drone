@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col">
             <h5 class="text-center display-4">Customer Information</h5>
@@ -17,6 +17,8 @@
                             <th scope="col">Name</th>
                             <th scope="col">System Access</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Company</th>
+                            <th scope="col">Address</th>
                             
                         </tr>
                     </thead>
@@ -35,6 +37,8 @@
                             {% if i.status == 'r' %}
                             <td align="left">Registered</td>
                             {% endif%}
+                            <td align="left">{{i.company_name}}</td>
+                            <td align="left">{{i.city}}, {{i.country}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
