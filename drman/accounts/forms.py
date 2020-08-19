@@ -7,6 +7,12 @@ from functools import partial
 
 DateInput = partial(forms.DateInput, {'class':'datepicker'})
 
+class CoordinateForm(ModelForm):
+
+    class Meta:
+        model = Coordinate
+        fields = '__all__'
+
 class MissionForm(ModelForm):
     date = forms.DateField(widget = DateInput())
     class Meta:

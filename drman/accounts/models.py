@@ -174,3 +174,12 @@ class Launch(models.Model):
     drone = models.CharField(max_length=150, null=True)
     def __str__(self):
         return self.mission
+
+class Coordinate(models.Model):
+    
+
+    mission = models.CharField(max_length=10, null=True)
+    c1 = models.DecimalField(max_digits=8, decimal_places=6, null=True,blank=False)
+    c2 = models.DecimalField(max_digits=8, decimal_places=6, null=True,blank=False)
+    c3 = models.DecimalField(max_digits=8, decimal_places=6, null=True,blank=False)
+    c4 = models.DecimalField(max_digits=8, decimal_places=6, null=True,blank=False)
