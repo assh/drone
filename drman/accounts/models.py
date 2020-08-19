@@ -158,6 +158,21 @@ class Mission(models.Model):
         "Mission Picture", null=True, blank=True, default="logo.png", upload_to='mission_img')
     launch_now = models.BooleanField("Launch Now?", null=True, default=False)
 
+
+    c11 = models.DecimalField(max_digits=8,decimal_places=6,null=True,blank=False)
+    c12 = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=False)
+
+    c21 = models.DecimalField(max_digits=8,decimal_places=6,null=True,blank=False)
+    c22 = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=False)
+
+    c31 = models.DecimalField(max_digits=8,decimal_places=6,null=True,blank=False)
+    c32 = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=False)
+
+    c41 = models.DecimalField(max_digits=8,decimal_places=6,null=True,blank=False)
+    c42 = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=False)
+    
+
+
     vds = models.CharField(max_length=20, null=True, blank=True)
     vda = models.CharField(max_length=200, null=True, blank=True)
     vc = models.CharField(max_length=50, null=True, blank=True)
@@ -174,12 +189,3 @@ class Launch(models.Model):
     drone = models.CharField(max_length=150, null=True)
     def __str__(self):
         return self.mission
-
-class Coordinate(models.Model):
-    
-
-    mission = models.CharField(max_length=10, null=True)
-    c1 = models.DecimalField(max_digits=8, decimal_places=6, null=True,blank=False)
-    c2 = models.DecimalField(max_digits=8, decimal_places=6, null=True,blank=False)
-    c3 = models.DecimalField(max_digits=8, decimal_places=6, null=True,blank=False)
-    c4 = models.DecimalField(max_digits=8, decimal_places=6, null=True,blank=False)
