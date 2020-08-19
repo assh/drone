@@ -11,7 +11,7 @@ def update_launch(sender, instance, created, **kwargs):
         #print("P2")
         if instance.launch_now == True:
             #print("P3")
-            Launch.objects.create(mission=instance, now='1')
+            Launch.objects.create(mission=instance, now='1', drone=instance.drone)
         if instance.launch_now == False:
             #print("P4")
             try:

@@ -171,6 +171,6 @@ class Launch(models.Model):
 
     mission = models.CharField(max_length=10, null=True)
     now = models.CharField(max_length=1, default='1', null=True)
-
+    drone = models.CharField(max_length=150, null=True)
     def __str__(self):
         return self.mission
