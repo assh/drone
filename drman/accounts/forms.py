@@ -7,6 +7,7 @@ from functools import partial
 
 DateInput = partial(forms.DateInput, {'class':'datepicker'})
 
+
 class MissionForm(ModelForm):
     date = forms.DateField(widget = DateInput())
     class Meta:

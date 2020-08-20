@@ -80,8 +80,11 @@ def createMission(request):
     form = Mission2Form()
     if request.method == 'POST':
         form = Mission2Form(request.POST, request.FILES)
-        if form.is_valid():
+        #form2 = CoordinateForm(request.POST)
+        if form.is_valid(): #and form2.is_valid():
             form.save()
+            #print(form.cleaned_data['mission_id'])
+            #form2.save()
             return redirect('/')
     context = {
         'form': form,

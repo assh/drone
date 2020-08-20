@@ -92,9 +92,9 @@ class Drone(models.Model):
     warranty = models.CharField(max_length=10, null=True, blank=True)
     date_purchase = models.DateField(verbose_name="Date of Purchase",
                                      auto_now_add=False, auto_now=False, null=True, blank=True)
-    date_operation = models.DateField(
+    date_operation = models.DateField(verbose_name="Date of Operation",
         auto_now_add=False, auto_now=False, null=True, blank=True)
-    date_shelved = models.DateField(
+    date_shelved = models.DateField(verbose_name="Date Expired",
         auto_now_add=False, auto_now=False, null=True, blank=True)
 
     vl = models.CharField(max_length=25,null=True,blank=True)
@@ -158,6 +158,21 @@ class Mission(models.Model):
         "Mission Picture", null=True, blank=True, default="logo.png", upload_to='mission_img')
     launch_now = models.BooleanField("Launch Now?", null=True, default=False)
 
+
+    c11 = models.DecimalField(max_digits=8,decimal_places=6,null=True,blank=False)
+    c12 = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=False)
+
+    c21 = models.DecimalField(max_digits=8,decimal_places=6,null=True,blank=False)
+    c22 = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=False)
+
+    c31 = models.DecimalField(max_digits=8,decimal_places=6,null=True,blank=False)
+    c32 = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=False)
+
+    c41 = models.DecimalField(max_digits=8,decimal_places=6,null=True,blank=False)
+    c42 = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=False)
+    
+
+
     vds = models.CharField(max_length=20, null=True, blank=True)
     vda = models.CharField(max_length=200, null=True, blank=True)
     vc = models.CharField(max_length=50, null=True, blank=True)
@@ -171,6 +186,6 @@ class Launch(models.Model):
 
     mission = models.CharField(max_length=10, null=True)
     now = models.CharField(max_length=1, default='1', null=True)
-
+    drone = models.CharField(max_length=150, null=True)
     def __str__(self):
         return self.mission
