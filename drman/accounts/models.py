@@ -92,9 +92,9 @@ class Drone(models.Model):
     warranty = models.CharField(max_length=10, null=True, blank=True)
     date_purchase = models.DateField(verbose_name="Date of Purchase",
                                      auto_now_add=False, auto_now=False, null=True, blank=True)
-    date_operation = models.DateField(
+    date_operation = models.DateField(verbose_name="Date of Operation",
         auto_now_add=False, auto_now=False, null=True, blank=True)
-    date_shelved = models.DateField(
+    date_shelved = models.DateField(verbose_name="Date Expired",
         auto_now_add=False, auto_now=False, null=True, blank=True)
 
     vl = models.CharField(max_length=25,null=True,blank=True)
