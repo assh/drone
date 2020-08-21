@@ -104,7 +104,7 @@ def updateMission(request, pk):
             return redirect('all-mission')
     context = {
         'form': form,
-
+        'mission_id': mission.mission_id,
     }
     return render(request, 'accounts/mission_update_form.html', context)
 

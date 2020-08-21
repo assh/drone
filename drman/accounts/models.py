@@ -55,7 +55,7 @@ class Location(models.Model):
     line_1 = models.CharField(max_length=50, null=True)
     line_2 = models.CharField(max_length=50, null=True)
     line_3 = models.CharField(max_length=50, null=True)
-    city = models.CharField(max_length=20, null=True, blank=True)
+    city = models.CharField(max_length=40, null=True, blank=True)
     zip_code = models.CharField(max_length=50, null=True)
     state = models.CharField(max_length=50, null=True)
     country = models.CharField(max_length=70, null=True)
