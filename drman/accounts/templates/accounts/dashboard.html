@@ -12,17 +12,19 @@
 			<a class="btn btn-success  btn-sm btn-block" href="{% url 'create-customer' %}">Add New Customer</a>
 			<br>
 			<table class="table">
-				<thead id="btnlaunch" style="text-align:center">
+				<thead id="btnlaunch" style="text-align:left">
 					<tr>
 						<th scope="col"></th>
-						<th scope="col">Customer</th>
+						<th align="left" scope="col">Customer ID</th>
+						<th align="left" scope="col">Customer Name</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for cust in customer|slice:":10"  %}
 					<tr>
 						<td><a class="btn btn-sm btn-info" href="{% url 'customer' cust.id %}" id="btnlaunch">View</a></td>
-						<td align="center">{{cust.company_name}}</td>
+						<td align="left">{{cust.customer_id}}</td>
+						<td align="left">{{cust.company_name}}</td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -31,7 +33,7 @@
 	</div>
 
 	<div class="col-md-7">
-		<h3 class="text-center">LAST 5 ORDERS</h3>
+		<h3 class="text-left">LAST 10 ORDERS</h3>
 		<hr>
 		<div class="card card-body">
 			<div class="row">
@@ -48,9 +50,10 @@
 			</div>
 			<br>
 			<table class="table">
-				<thead id="btnlaunch" style="text-align:center">
+				<thead id="btnlaunch" style="text-align:left">
 					<tr>
 						<th>Mission</th>
+						<th>Customer ID</th>
 						<th>Date Scheduled</th>
 						<th>Status</th>
 						<th>Update</th>
@@ -59,10 +62,11 @@
 				<tbody>
 					{% for miss in mission|slice:":10" %}
 					<tr>
-						<td align="center">{{miss.mission_id}}</td>
-						<td align="center">{{miss.date|date:"d/m/y"}} {{miss.time|date:"H:i:s"}}</td>
-						<td align="center">{{miss.mission_status}}</td>
-						<td align="center"><a class="btn btn-info btn-sm" href="{% url 'launch' miss.id %}" id="btnlaunch">View</a>
+						<td align="left">{{miss.mission_id}}</td>
+						<td align="left">{{miss.vc}}</td>
+						<td align="left">{{miss.date|date:"d/m/y"}} {{miss.time|date:"H:i:s"}}</td>
+						<td align="left">{{miss.mission_status}}</td>
+						<td align="left"><a class="btn btn-info btn-sm" href="{% url 'launch' miss.id %}" id="btnlaunch">View</a>
 						</td>
 					</tr>
 					{% endfor %}
