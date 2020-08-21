@@ -45,6 +45,9 @@ class DroneForm(ModelForm):
         model = Drone
         fields = '__all__'
         exclude = ['vl']
+        widgets = {
+            'droneid': forms.TextInput(attrs={'disabled': 'true'}),
+        }
 
 class MyDroneForm(ModelForm):
     required_css_class = 'required'
