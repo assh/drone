@@ -6,7 +6,17 @@ import csv
 
 class Customer(models.Model):
 
-    customer_id = models.CharField("Customer ID", max_length=50, null=True)
+    def incrementid():
+        no = Customer.objects.count()
+        np = f'{no:06}'
+        if no == None:
+            return 'CUST-000001'
+        else:
+            no = no+1
+            np = f'CUST-{no:06}'
+            return np
+
+    customer_id = models.CharField("Customer ID", default=incrementid, max_length=50, null=True)
 
     LOAN_STATUS = (
         ('a', 'Active'),
@@ -30,9 +40,9 @@ class Customer(models.Model):
     line1 = models.CharField("Address Line 1", max_length=50, null=True)
     line2 = models.CharField("Address Line 2", max_length=50, null=True)
     line3 = models.CharField("Address Line 3", max_length=50, null=True)
-    city = models.CharField(max_length=15, null=True)
+    city = models.CharField(max_length=40, null=True)
     zip_code = models.CharField("ZIP/Post Code", max_length=20, null=True)
-    state = models.CharField(max_length=20, null=True)
+    state = models.CharField(max_length=40, null=True)
     country = models.CharField(max_length=50, null=True)
     date_created = models.DateField(
         "Date Created", auto_now=True, null=True, blank=True)

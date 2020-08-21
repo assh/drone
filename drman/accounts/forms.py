@@ -29,7 +29,7 @@ class CustomerForm(ModelForm):
     class Meta:
         model = Customer
         fields = '__all__'
-        exclude = ['date_start','date_created']
+        exclude = ['date_start','date_created','customer_id']
 
 class CreateUser(UserCreationForm):
     class Meta:
