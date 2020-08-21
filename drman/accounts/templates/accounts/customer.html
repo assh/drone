@@ -42,24 +42,68 @@
 		<hr>
 		<div class="card card-body">
 
-			<table class="table" id="table_id">
-				<thead id="btnlaunch" style="text-align:left">
-					<tr>
-						<th scope="col">Mission No.</th>
-						<th scope="col">Mission Status</th>
-						<th scope="col">Drone Assigned</th>
-					</tr>
+			<table class="table table-hover table-striped" id="table_id">
+				<thead style="text-align:left" id="btnlaunch">
+				  <tr>
+					<th scope="col">Mission No</th>
+					<th scope="col">Drone Station</th>
+					<th scope="col">Drone Assigned</th>
+					<th scope="col">Mission Type</th>
+					<th scope="col">Manager</th>
+					<th scope="col">Media Type</th>
+					<th scope="col">Date</th>
+					<th scope="col">Time</th>
+					<th scope="col">Status</th>
+					<th scope="col">Customer</th>
+					<th scope="col">Launch Mode</th>
+			  
+			  
+				  </tr>
 				</thead>
 				<tbody>
-					{% for mission in missions %}
-						<tr>
-							<td align="left">{{mission.mission_id}}</td>
-							<td align="left">{{mission.mission_status}}</td>
-							<td align="left">{{mission.vda}}</td>
-						</tr>
-					{% endfor %}
+				  {% for mission in missions %}
+				  <tr>
+					<td align="left"><a href="{% url 'launch' mission.id %}">{{mission.mission_id}}</a></td>
+					<td align="left">{{mission.vds}}</td>
+					<td align="left">{{mission.vda}}</td>
+			  
+					{% if mission.mission_type == '1' %}
+					<td align="left">Loiter</td>
+					{% elif mission.mission_type == '2' %}
+					<td align="left">Circumferance</td>
+					{% else %}
+					<td align="left">Comprehensive</td>
+					{% endif %}
+			  
+			  
+					<td align="left">{{mission.vm}}</td>
+			  
+			  
+					{% if mission.mode_type == '1' %}
+					<td align="left">Photo</td>
+					{% else %}
+			  
+					<td align="left">Video</td>
+					{% endif %}
+					<td align="left">{{mission.date|date:"d/m/y"}}</td>
+					<td align="left">{{mission.time|date:"H:i:s"}}</td>
+					<td align="left">{{mission.mission_status}}
+			  
+					<td align="left">{{mission.vc}}
+					  {% if mission.launch_mode == 'MANUAL' and mission.launch_now == False %}
+					<td align="center"><a type="button" class="btn btn-sm" href="{% url 'launch-drone' mission.id%}" id ="btnlaunch">MANUAL</a></td>
+					{% endif %}
+					{% if mission.launch_mode == 'AUTO' %}
+					<td align="center"><button type="button" class="btn btn-sm" href="#" disabled id ="btnlaunch">AUTO</button></td>
+					{% endif %}
+					{% if mission.launch_mode == 'MANUAL' and mission.launch_now == True %}
+					<td align="center"><button type="button" class="btn btn-sm" href="#" disabled id ="btnlaunch"  >MANUAL</button></td>
+					{% endif %}
+			  
+				  </tr>
+				  {% endfor %}
 				</tbody>
-			</table>
+			  </table>
 		</div>
 	</div>
 
