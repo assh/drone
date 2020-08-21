@@ -82,9 +82,20 @@
                 {% for dr in drone_info %}
                 <tr>
                     <td><a href="{% url 'launch' dr.id %}">{{dr.mission_id}}</a></td>
-                    <td>{{dr.mission_type}}</td>
+                    {% if dr.mission_type == '1' %}
+                    <td align="left">Loiter</td>
+                    {% elif dr.mission_type == '2' %}
+                    <td align="left">Circumferance</td>
+                    {% else %}
+                    <td align="left">Comprehensive</td>
+                    {% endif %}
                     <td>{{dr.vm}}</td>
-                    <td>{{dr.mode_type}}</td>
+                    {% if dr.mode_type == '1' %}
+                    <td align="left">Photo</td>
+                    {% else %}
+
+                    <td align="left">Video</td>
+                    {% endif %}
                     <td>{{dr.date}}</td>
                     <td>{{dr.time}}</td>
                     <td>{{dr.mission_status}}</td>
