@@ -35,7 +35,7 @@
 	</div>
 
 	<div class="col-md-7">
-		<h3 class="text-left">LAST 10 ORDERS</h3>
+		<h3 class="text-center">LAST 10 ORDERS</h3>
 		<hr>
 		<div class="card card-body">
 			<div class="row">
@@ -96,11 +96,10 @@
   $(document).ready( function () {
     $('table.display').DataTable({
 
-      buttons:{
-        name:'primary',
-        buttons:['copy','csv','excel','pdf']
-      },
-      responsive: true
+      responsive: true,
+	  paging:false,
+	  searching:false,
+	  bInfo:false
     }
 
 
