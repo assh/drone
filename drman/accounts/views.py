@@ -42,7 +42,7 @@ def customer_list(request):
 @login_required(login_url='login')
 def customer(request, pk):
     customer = Customer.objects.get(id=pk)
-    mission = customer.mission_set.all().order_by('-mission_id')
+    mission = customer.mission_set.values().order_by('-mission_id')
     total_mission = mission.count()
     somedict = {'customer': customer, 'missions': mission,
                 'total_mission': total_mission}
@@ -80,8 +80,11 @@ def createMission(request):
     form = Mission2Form()
     if request.method == 'POST':
         form = Mission2Form(request.POST, request.FILES)
-        if form.is_valid():
+        #form2 = CoordinateForm(request.POST)
+        if form.is_valid(): #and form2.is_valid():
             form.save()
+            #print(form.cleaned_data['mission_id'])
+            #form2.save()
             return redirect('/')
     context = {
         'form': form,
@@ -101,7 +104,7 @@ def updateMission(request, pk):
             return redirect('all-mission')
     context = {
         'form': form,
-
+        'mission_id': mission.mission_id,
     }
     return render(request, 'accounts/mission_update_form.html', context)
 
@@ -113,15 +116,15 @@ def status(request):
     context = {
         'customer': customer,
         'mission': mission,
-        'total_missions': Mission.objects.all().count(),
+        'total_missions': mission.count(),
         'total_drone': Drone.objects.all().count(),
         'maintenance_drone': Drone.objects.filter(status="m").count(),
         'onloan_drone': Drone.objects.filter(status="o").count(),
         'available_drone': Drone.objects.filter(status="a").count(),
         'reserved_drone': Drone.objects.filter(status="r").count(),
-        'mission_complete': Mission.objects.filter(mission_status="Complete").count(),
-        'mission_pending': Mission.objects.filter(mission_status="Pending").count(),
-        'mission_cancelled': Mission.objects.filter(mission_status="Cancelled").count(),
+        'mission_complete': mission.filter(mission_status="Complete").count(),
+        'mission_pending': mission.filter(mission_status="Pending").count(),
+        'mission_cancelled': mission.filter(mission_status="Cancelled").count(),
     }
     return render(request, 'accounts/status.html', context)
 
@@ -150,7 +153,10 @@ def updateCustomer(request, pk):
         if form.is_valid():
             form.save()
             return redirect('/')
-    context = {'form': form}
+    context = {'form': form,
+        'customer':customer,
+
+        }
     return render(request, 'accounts/customer_form.html', context)
 
 
@@ -232,9 +238,11 @@ def mymission(request):
 def my_drone(request, pk):
 
     drone = Drone.objects.get(id=pk)
+    drone_info = drone.mission_set.values()
     form = MyDroneForm(instance=drone)
     context = {
         'drone': drone,
+        'drone_info': drone_info,
         'form': form,
     }
     return render(request, 'accounts/my_drone.html', context)

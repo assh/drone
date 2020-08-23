@@ -8,3 +8,5 @@ drman/accounts/migrations/
 .vscode/settings.json
 drman/static/images/
 drman/accounts/mission.csv
+drman/dev/__pycache__
+drman/dev/migrations

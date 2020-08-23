@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['drone-asish.herokuapp.com','127.0.0.1']
 INSTALLED_APPS = [
     'crispy_forms',
     'accounts.apps.AccountsConfig',
+    'dev.apps.DevConfig',
     'django_filters',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'sorl.thumbnail',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'drman.urls'
@@ -167,4 +170,10 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_QUERYSTRING_AUTH = False
 
 THUMBNAIL_FORCE_OVERWRITE = True
+
+INTERNAL_IPS = [
+
+    '127.0.0.1',
+ 
+]
 

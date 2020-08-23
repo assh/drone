@@ -6,7 +6,17 @@ import csv
 
 class Customer(models.Model):
 
-    customer_id = models.CharField("Customer ID", max_length=50, null=True)
+    def incrementid():
+        no = Customer.objects.count()
+        np = f'{no:06}'
+        if no == None:
+            return 'CUST-000001'
+        else:
+            no = no+1
+            np = f'CUST-{no:06}'
+            return np
+
+    customer_id = models.CharField("Customer ID", default=incrementid, max_length=50, null=True)
 
     LOAN_STATUS = (
         ('a', 'Active'),
@@ -30,9 +40,9 @@ class Customer(models.Model):
     line1 = models.CharField("Address Line 1", max_length=50, null=True)
     line2 = models.CharField("Address Line 2", max_length=50, null=True)
     line3 = models.CharField("Address Line 3", max_length=50, null=True)
-    city = models.CharField(max_length=15, null=True)
+    city = models.CharField(max_length=40, null=True)
     zip_code = models.CharField("ZIP/Post Code", max_length=20, null=True)
-    state = models.CharField(max_length=20, null=True)
+    state = models.CharField(max_length=40, null=True)
     country = models.CharField(max_length=50, null=True)
     date_created = models.DateField(
         "Date Created", auto_now=True, null=True, blank=True)
@@ -55,7 +65,7 @@ class Location(models.Model):
     line_1 = models.CharField(max_length=50, null=True)
     line_2 = models.CharField(max_length=50, null=True)
     line_3 = models.CharField(max_length=50, null=True)
-    city = models.CharField(max_length=20, null=True, blank=True)
+    city = models.CharField(max_length=50, null=True, blank=True)
     zip_code = models.CharField(max_length=50, null=True)
     state = models.CharField(max_length=50, null=True)
     country = models.CharField(max_length=70, null=True)
@@ -92,9 +102,9 @@ class Drone(models.Model):
     warranty = models.CharField(max_length=10, null=True, blank=True)
     date_purchase = models.DateField(verbose_name="Date of Purchase",
                                      auto_now_add=False, auto_now=False, null=True, blank=True)
-    date_operation = models.DateField(
+    date_operation = models.DateField(verbose_name="Date of Operation",
         auto_now_add=False, auto_now=False, null=True, blank=True)
-    date_shelved = models.DateField(
+    date_shelved = models.DateField(verbose_name="Date Expired",
         auto_now_add=False, auto_now=False, null=True, blank=True)
 
     vl = models.CharField(max_length=25,null=True,blank=True)
@@ -158,6 +168,21 @@ class Mission(models.Model):
         "Mission Picture", null=True, blank=True, default="logo.png", upload_to='mission_img')
     launch_now = models.BooleanField("Launch Now?", null=True, default=False)
 
+
+    c11 = models.DecimalField("Latitude", max_digits=8,decimal_places=6,null=True,blank=False)
+    c12 = models.DecimalField("Longitude", max_digits=9,decimal_places=6,null=True,blank=False)
+
+    c21 = models.DecimalField("Latitude", max_digits=8,decimal_places=6,null=True,blank=False)
+    c22 = models.DecimalField("Longitude", max_digits=9,decimal_places=6,null=True,blank=False)
+
+    c31 = models.DecimalField("Latitude", max_digits=8,decimal_places=6,null=True,blank=False)
+    c32 = models.DecimalField("Longitude", max_digits=9,decimal_places=6,null=True,blank=False)
+
+    c41 = models.DecimalField("Latitude", max_digits=8,decimal_places=6,null=True,blank=False)
+    c42 = models.DecimalField("Longitude", max_digits=9,decimal_places=6,null=True,blank=False)
+    
+
+
     vds = models.CharField(max_length=20, null=True, blank=True)
     vda = models.CharField(max_length=200, null=True, blank=True)
     vc = models.CharField(max_length=50, null=True, blank=True)
@@ -171,6 +196,6 @@ class Launch(models.Model):
 
     mission = models.CharField(max_length=10, null=True)
     now = models.CharField(max_length=1, default='1', null=True)
-
+    drone = models.CharField(max_length=150, null=True)
     def __str__(self):
         return self.mission
