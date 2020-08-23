@@ -153,7 +153,10 @@ def updateCustomer(request, pk):
         if form.is_valid():
             form.save()
             return redirect('/')
-    context = {'form': form}
+    context = {'form': form,
+        'customer':customer,
+
+        }
     return render(request, 'accounts/customer_form.html', context)
 
 

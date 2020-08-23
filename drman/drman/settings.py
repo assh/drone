@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['drone-asish.herokuapp.com','127.0.0.1']
 INSTALLED_APPS = [
     'crispy_forms',
     'accounts.apps.AccountsConfig',
+    'dev.apps.DevConfig',
     'django_filters',
     'django.contrib.admin',
     'django.contrib.auth',
