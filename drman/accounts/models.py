@@ -169,17 +169,17 @@ class Mission(models.Model):
     launch_now = models.BooleanField("Launch Now?", null=True, default=False)
 
 
-    c11 = models.DecimalField(max_digits=8,decimal_places=6,null=True,blank=False)
-    c12 = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=False)
+    c11 = models.DecimalField("Latitude", max_digits=8,decimal_places=6,null=True,blank=False)
+    c12 = models.DecimalField("Longitude", max_digits=9,decimal_places=6,null=True,blank=False)
 
-    c21 = models.DecimalField(max_digits=8,decimal_places=6,null=True,blank=False)
-    c22 = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=False)
+    c21 = models.DecimalField("Latitude", max_digits=8,decimal_places=6,null=True,blank=False)
+    c22 = models.DecimalField("Longitude", max_digits=9,decimal_places=6,null=True,blank=False)
 
-    c31 = models.DecimalField(max_digits=8,decimal_places=6,null=True,blank=False)
-    c32 = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=False)
+    c31 = models.DecimalField("Latitude", max_digits=8,decimal_places=6,null=True,blank=False)
+    c32 = models.DecimalField("Longitude", max_digits=9,decimal_places=6,null=True,blank=False)
 
-    c41 = models.DecimalField(max_digits=8,decimal_places=6,null=True,blank=False)
-    c42 = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=False)
+    c41 = models.DecimalField("Latitude", max_digits=8,decimal_places=6,null=True,blank=False)
+    c42 = models.DecimalField("Longitude", max_digits=9,decimal_places=6,null=True,blank=False)
     
 
 
