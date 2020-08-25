@@ -3,59 +3,60 @@
 
 {% block content %}
 <div class="container-fluid">
-<div class="row">
-	<div class="col">
-		<h5 class="text-center">Drone Info</h5>
-		<hr>
-		<div class="card card-body">
-			<a class="btn btn-info  btn-sm btn-block" href="{% url 'create-drone' %}" id="btnlaunch">Add Drone</a>
-			<br>
-			<table class="table" id="table_id">
-				<thead id="btnlaunch" style="text-align:left">
-					<tr>
-						<th scope="col">Drone ID</th>
-						<th scope="col">Station</th>
-						<th scope="col">EAN</th>
-						<th scope="col">Make</th>
-						<th scope="col">Status</th>
-						<th scope="col">Model No.</th>
-						<th scope="col">Date Purchased</th>
-						<th scope="col">Date Operation Started</th>
-						<th scope="col">Update</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for i in drones %}
-					<tr>
-						<td align="left"><a href="{% url 'my-drone' i.id %}">{{i.droneid}}</a></td>
-						<td align="left">{{i.vl}}</td>
-						<td align="left">{{i.ean}}</td>
-						<td align="left">{{i.make}}</td>
-						{% if i.status == 'm' %}
-						<td align="left">Maintenance</td>
-						{% endif%}
-						{% if i.status == 'o' %}
-						<td align="left">On Loan</td>
-						{% endif%}
-						{% if i.status == 'a' %}
-						<td align="left">Available</td>
-						{% endif%}
-						{% if i.status == 'r' %}
-						<td align="left">Reserved</td>
-						{% endif%}
-						<td align="left">{{i.model_no}}</td>
-						<td align="left">{{i.date_purchase|date:"d/m/y"}}</td>
-						<td align="left">{{i.date_operation|date:"d/m/y"}}</td>
-						<td align="left"><a class="btn btn-info btn-sm" href="{% url 'update-drone' i.id %}" id="btnlaunch">Update Drone</a></td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+	<div class="row">
+		<div class="col">
+			<h5 class="text-center">Drone Info</h5>
+			<hr>
+			<div class="card card-body">
+				<a class="btn btn-info  btn-sm btn-block" href="{% url 'create-drone' %}" id="btnlaunch">Add Drone</a>
+				<br>
+				<table class="table" id="table_id">
+					<thead id="btnlaunch" style="text-align:left">
+						<tr>
+							<th scope="col">Drone ID</th>
+							<th scope="col">Station</th>
+							<th scope="col">EAN</th>
+							<th scope="col">Make</th>
+							<th scope="col">Status</th>
+							<th scope="col">Model No.</th>
+							<th scope="col">Date Purchased</th>
+							<th scope="col">Date Operation Started</th>
+							<th scope="col">Update</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for i in drones %}
+						<tr>
+							<td align="left"><a href="{% url 'my-drone' i.id %}">{{i.droneid}}</a></td>
+							<td align="left">{{i.vl}}</td>
+							<td align="left">{{i.ean}}</td>
+							<td align="left">{{i.make}}</td>
+							{% if i.status == 'm' %}
+							<td align="left">Maintenance</td>
+							{% endif%}
+							{% if i.status == 'o' %}
+							<td align="left">On Loan</td>
+							{% endif%}
+							{% if i.status == 'a' %}
+							<td align="left">Available</td>
+							{% endif%}
+							{% if i.status == 'r' %}
+							<td align="left">Reserved</td>
+							{% endif%}
+							<td align="left">{{i.model_no}}</td>
+							<td align="left">{{i.date_purchase|date:"d/m/y"}}</td>
+							<td align="left">{{i.date_operation|date:"d/m/y"}}</td>
+							<td align="left"><a class="btn btn-info btn-sm" href="{% url 'update-drone' i.id %}"
+									id="btnlaunch">Update Drone</a></td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
 
 
+			</div>
 		</div>
 	</div>
-</div>
 
 	{% endblock %}
 
@@ -67,12 +68,15 @@
 		href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/fh-3.1.7/kt-2.5.2/r-2.2.5/rg-1.1.2/sp-1.1.1/sl-1.3.1/datatables.min.css" />
 
 
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css" />
 
-		<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
-		<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
 
-		
+
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 	<script type="text/javascript"
@@ -96,4 +100,3 @@
 	</script>
 
 	{% endblock %}
-	<!--prechange-->

@@ -5,12 +5,10 @@
 
 <div class="container">
     <div class="card card-body">
+        <h2>Drone ID: {{droneid}}</h2>
         <form action="" method="POST">
             {% csrf_token %}
             <div class="form-row">
-                <div class="form-group col-md-6 mb-0">
-                    {{form.droneid|as_crispy_field}}
-                </div>
                 <div class="form-group col-md-6 mb-0">
                     {{form.model_no|as_crispy_field}}
                 </div>
