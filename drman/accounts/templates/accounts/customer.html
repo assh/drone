@@ -9,7 +9,8 @@
 			<h6> Name: {{customer.first_name}} {{customer.last_name}}</h6>
 			<h6> Compamy: {{customer.company_name}}</h6>
 			<hr>
-			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'update-customer' customer.id %}">Update Customer</a>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'update-customer' customer.id %}">Update
+				Customer</a>
 
 		</div>
 	</div>
@@ -44,64 +45,67 @@
 
 			<table class="table table-hover table-striped" id="table_id">
 				<thead style="text-align:left" id="btnlaunch">
-				  <tr>
-					<th scope="col">Mission No</th>
-					<th scope="col">Drone Station</th>
-					<th scope="col">Drone Assigned</th>
-					<th scope="col">Mission Type</th>
-					<th scope="col">Manager</th>
-					<th scope="col">Media Type</th>
-					<th scope="col">Date</th>
-					<th scope="col">Time</th>
-					<th scope="col">Status</th>
-					<th scope="col">Launch Mode</th>
-			  
-			  
-				  </tr>
+					<tr>
+						<th scope="col">Mission No</th>
+						<th scope="col">Drone Station</th>
+						<th scope="col">Drone Assigned</th>
+						<th scope="col">Mission Type</th>
+						<th scope="col">Manager</th>
+						<th scope="col">Media Type</th>
+						<th scope="col">Date</th>
+						<th scope="col">Time</th>
+						<th scope="col">Status</th>
+						<th scope="col">Launch Mode</th>
+
+
+					</tr>
 				</thead>
 				<tbody>
-				  {% for mission in missions %}
-				  <tr>
-					<td align="left"><a href="{% url 'launch' mission.id %}">{{mission.mission_id}}</a></td>
-					<td align="left">{{mission.vds}}</td>
-					<td align="left">{{mission.vda}}</td>
-			  
-					{% if mission.mission_type == '1' %}
-					<td align="left">Loiter</td>
-					{% elif mission.mission_type == '2' %}
-					<td align="left">Circumferance</td>
-					{% else %}
-					<td align="left">Comprehensive</td>
-					{% endif %}
-			  
-			  
-					<td align="left">{{mission.vm}}</td>
-			  
-			  
-					{% if mission.mode_type == '1' %}
-					<td align="left">Photo</td>
-					{% else %}
-			  
-					<td align="left">Video</td>
-					{% endif %}
-					<td align="left">{{mission.date|date:"d/m/y"}}</td>
-					<td align="left">{{mission.time|date:"H:i:s"}}</td>
-					<td align="left">{{mission.mission_status}}
-			  
-					  {% if mission.launch_mode == 'MANUAL' and mission.launch_now == False %}
-					<td align="center"><a type="button" class="btn btn-sm" href="{% url 'launch-drone' mission.id%}" id ="btnlaunch">MANUAL</a></td>
-					{% endif %}
-					{% if mission.launch_mode == 'AUTO' %}
-					<td align="center"><button type="button" class="btn btn-sm" href="#" disabled id ="btnlaunch">AUTO</button></td>
-					{% endif %}
-					{% if mission.launch_mode == 'MANUAL' and mission.launch_now == True %}
-					<td align="center"><button type="button" class="btn btn-sm" href="#" disabled id ="btnlaunch"  >MANUAL</button></td>
-					{% endif %}
-			  
-				  </tr>
-				  {% endfor %}
+					{% for mission in missions %}
+					<tr>
+						<td align="left"><a href="{% url 'launch' mission.id %}">{{mission.mission_id}}</a></td>
+						<td align="left">{{mission.vds}}</td>
+						<td align="left">{{mission.vda}}</td>
+
+						{% if mission.mission_type == '1' %}
+						<td align="left">Loiter</td>
+						{% elif mission.mission_type == '2' %}
+						<td align="left">Circumferance</td>
+						{% else %}
+						<td align="left">Comprehensive</td>
+						{% endif %}
+
+
+						<td align="left">{{mission.vm}}</td>
+
+
+						{% if mission.mode_type == '1' %}
+						<td align="left">Photo</td>
+						{% else %}
+
+						<td align="left">Video</td>
+						{% endif %}
+						<td align="left">{{mission.date|date:"d/m/y"}}</td>
+						<td align="left">{{mission.time|date:"H:i:s"}}</td>
+						<td align="left">{{mission.mission_status}}
+
+							{% if mission.launch_mode == 'MANUAL' and mission.launch_now == False %}
+						<td align="center"><a type="button" class="btn btn-sm" href="{% url 'launch-drone' mission.id%}"
+								id="btnlaunch">MANUAL</a></td>
+						{% endif %}
+						{% if mission.launch_mode == 'AUTO' %}
+						<td align="center"><button type="button" class="btn btn-sm" href="#" disabled
+								id="btnlaunch">AUTO</button></td>
+						{% endif %}
+						{% if mission.launch_mode == 'MANUAL' and mission.launch_now == True %}
+						<td align="center"><button type="button" class="btn btn-sm" href="#" disabled
+								id="btnlaunch">MANUAL</button></td>
+						{% endif %}
+
+					</tr>
+					{% endfor %}
 				</tbody>
-			  </table>
+			</table>
 		</div>
 	</div>
 
@@ -109,33 +113,37 @@
 
 	{% block js %}
 
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/fh-3.1.7/kt-2.5.2/r-2.2.5/rg-1.1.2/sp-1.1.1/sl-1.3.1/datatables.min.css"/>
-	 
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/fh-3.1.7/kt-2.5.2/r-2.2.5/rg-1.1.2/sp-1.1.1/sl-1.3.1/datatables.min.css" />
 
-<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css" />
+
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/fh-3.1.7/kt-2.5.2/r-2.2.5/rg-1.1.2/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/fh-3.1.7/kt-2.5.2/r-2.2.5/rg-1.1.2/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
 	<script>
-	  $(document).ready( function () {
-		$('#table_id').DataTable({
-	
-		  buttons:{
-			name:'primary',
-			buttons:['copy','csv','excel','pdf']
-		  },
-		  responsive: true
-		}
-	
-	
-		);
-		table.buttons().container()
-			.appendTo( '#example_wrapper .col-md-6:eq(0)' );
-	} );
+		$(document).ready(function () {
+			$('#table_id').DataTable({
+
+				buttons: {
+					name: 'primary',
+					buttons: ['copy', 'csv', 'excel', 'pdf']
+				},
+				responsive: true
+			}
+
+
+			);
+			table.buttons().container()
+				.appendTo('#example_wrapper .col-md-6:eq(0)');
+		});
 	</script>
-	
+
 	{% endblock %}
-	
