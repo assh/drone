@@ -66,11 +66,7 @@
                         <h4>{{mission.manager}}</h4>
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <div class="col-md mx-5 my-2">
-                    <a href="{{mission.mission_pic.url}}">Mission Image</a>
-                </div>
-                </div> -->
+
                 <br>
                 <div class="row">
                     <div class="col-md">
@@ -78,8 +74,7 @@
                             class="btn btn-primary btn-lg btn-block">Update</a>
                     </div>
                     <div class="col-md">
-                        <a href="#"
-                        class="btn btn-danger btn-lg btn-block">Delete</a>
+                        <a href="#" class="btn btn-danger btn-lg btn-block">Delete</a>
                     </div>
                 </div>
 
@@ -90,11 +85,9 @@
             <div class="card-body">
                 <h5 class="card-title">Mission Map</h5>
                 {% thumbnail mission.mission_pic "500x500" crop="center" as im %}
-                    <a href="{{ im.url }}"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>
+                <a href="{{ im.url }}"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>
                 {% endthumbnail %}
-                <!-- <img src="{{mission.mission_pic.url}}"> -->
-                <!-- <p class="card-text">This is were the map will be
-                    displayed............................................................................</p> -->
+
             </div>
         </div>
     </div>

@@ -2,20 +2,22 @@
 
 
 {% block content %}
-<div class = "container">
-    <br>
-    <div class="row">
+<div class="container">
+	<br>
+	<div class="row">
 		<div class="col col-md">
 			<div class="card text-center text-black  mb-3">
 				<div class="card-header">
 					<h5 class="card-title">User Authentication</h5>
 				</div>
 				<div class="card-body">
-                    <p class="card-text">For security reasons, you may not be able to login to the website until the admins have authenticated you.</p>
-                    <p class="card-text">Please contact the admins at test@test.com and then proceed to <a href="{% url 'login' %}">Login</a></p>
+					<p class="card-text">For security reasons, you may not be able to login to the website until the
+						admins have authenticated you.</p>
+					<p class="card-text">Please contact the admins at test@test.com and then proceed to <a
+							href="{% url 'login' %}">Login</a></p>
 				</div>
 			</div>
-        </div>
-    </div>
+		</div>
+	</div>
 </div>
 {% endblock %}

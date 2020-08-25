@@ -81,10 +81,10 @@ def createMission(request):
     if request.method == 'POST':
         form = Mission2Form(request.POST, request.FILES)
         #form2 = CoordinateForm(request.POST)
-        if form.is_valid(): #and form2.is_valid():
+        if form.is_valid():  # and form2.is_valid():
             form.save()
-            #print(form.cleaned_data['mission_id'])
-            #form2.save()
+            # print(form.cleaned_data['mission_id'])
+            # form2.save()
             return redirect('/')
     context = {
         'form': form,
@@ -154,9 +154,9 @@ def updateCustomer(request, pk):
             form.save()
             return redirect('/')
     context = {'form': form,
-        'customer':customer,
+               'customer': customer,
 
-        }
+               }
     return render(request, 'accounts/customer_form.html', context)
 
 
@@ -214,14 +214,14 @@ def createDrone(request):
 def updateDrone(request, pk):
 
     drone = Drone.objects.get(id=pk)
-    form = DroneForm(instance=drone)
+    form = DroneFormUpdate(instance=drone)
     if request.method == 'POST':
-        form = DroneForm(request.POST, instance=drone)
+        form = DroneFormUpdate(request.POST, instance=drone)
         if form.is_valid():
             form.save()
             return redirect('drone')
-    context = {'form': form}
-    return render(request, 'accounts/drone_form.html', context)
+    context = {'form': form, 'droneid': drone.droneid}
+    return render(request, 'accounts/drone_form_update.html', context)
 
 
 @login_required(login_url='login')
@@ -266,6 +266,7 @@ def launch_drone(request, pk):
 
 def regRedirect(request):
     return render(request, 'accounts/register_redirect.html')
+
 
 @login_required(login_url='login')
 def testing(request):
