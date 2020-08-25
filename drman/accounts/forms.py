@@ -45,9 +45,20 @@ class DroneForm(ModelForm):
         model = Drone
         fields = '__all__'
         exclude = ['vl']
-        widgets = {
-            'droneid': forms.TextInput(attrs={'disabled': 'true'}),
-        }
+        #widgets = {
+        #    'droneid': forms.TextInput(attrs={'disabled': 'false'}),
+        #}
+
+class DroneFormUpdate(ModelForm):
+    required_css_class = 'required'
+    date_purchase = forms.DateField(widget = DateInput(),label="Date of Purchase")
+    date_operation = forms.DateField(widget = DateInput(),required=False,label="Date Operation Started")
+    date_shelved = forms.DateField(widget = DateInput(),required=False,label="Date Shelved")
+    class Meta:
+        model = Drone
+        fields = '__all__'
+        exclude = ['vl','droneid']
+
 
 class MyDroneForm(ModelForm):
     required_css_class = 'required'

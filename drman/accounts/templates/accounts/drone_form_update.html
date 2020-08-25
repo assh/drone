@@ -1,0 +1,79 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% load crispy_forms_tags  %}
+{% block content %}
+
+<div class="container">
+    <div class="card card-body">
+        <h2>Drone ID: {{droneid}}</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6 mb-0">
+            {{form.model_no|as_crispy_field}}
+        </div>
+    </div>
+    <hr>
+
+
+    <div class="form-row">
+        <div class="form-group col-md-4 mb-0">
+            {{form.description|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-4 mb-0">
+            {{form.make|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-4 mb-0">
+            {{form.ean|as_crispy_field}}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6 mb-0">
+            {{form.status|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            {{form.warranty|as_crispy_field}}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4 mb-0">
+            {{form.price_currency|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-4 mb-0">
+            {{form.price|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-4 mb-0">
+            {{form.locale|as_crispy_field}}
+        </div>
+    </div>
+    <hr>
+    <div class="form-row">
+        <div class="form-group col-md-4 mb-0">
+            {{form.date_purchase|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-4 mb-0">
+            {{form.date_operation|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-4 mb-0">
+            {{form.date_shelved|as_crispy_field}}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script>
+$(document).ready(function() {
+    $('.datepicker').datepicker();
+});
+</script>
+{% endblock %}
