@@ -1,6 +1,18 @@
 {% extends 'accounts/main.html' %}
 {% load static %}
 {% load thumbnail %}
+
+{% block head %}
+
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+
+<!-- PubNub CDN -->
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.19.0.min.js"></script>
+
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="row">
@@ -82,15 +94,90 @@
 
         </div>
         <div class="card">
-            <div class="card-body">
+            <div id='map' style='width: 500px; height: 500px;'></div>
+
+            <!-- <div class="card-body">
                 <h5 class="card-title">Mission Map</h5>
                 {% thumbnail mission.mission_pic "500x500" crop="center" as im %}
                 <a href="{{ im.url }}"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>
                 {% endthumbnail %}
 
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
 
+{% endblock %}
+
+{% block js %}
+<script>
+    window.lat = 25.351222;
+    window.lng = 55.387197;
+
+    // function getLocation() {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(updatePosition);
+    //     }
+      
+    //     return null;
+    // };
+    // function updatePosition(position) {
+    //   if (position) {
+    //     window.lat = position.coords.latitude;
+    //     window.lng = position.coords.longitude;
+    //   }
+    // }
+    // setInterval(function(){updatePosition(getLocation());}, 10000);
+      
+    // function currentLocation() {
+    //   return {lat:window.lat, lng:window.lng};
+    // };
+
+
+
+
+    var map;
+    var mark;
+    var lineCoords = [];
+
+    
+    
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYXNzaHBhbiIsImEiOiJja2Z2ejkxcnEwZnU2MnlwN2g0NDZhY3VwIn0.WYMqF3Ih2Quk24PjbF42QQ';
+    map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [55.387197,25.351222],
+    zoom: 12
+    });
+    map.addControl(new mapboxgl.NavigationControl());
+
+    var redraw = function(payload){
+        lat = payload.message.lat;
+        lng = payload.message.lng;
+        map.setCenter([lng,lat]);
+        mark.setLngLat([lng,lat]);
+    }
+
+    mark = new mapboxgl.Marker()
+.setLngLat([55.387197,25.351222 ])
+.addTo(map);
+
+
+    var pnChannel = "{{mission.mission_id}}";
+    var pubnub = new PubNub({
+      publishKey:   'pub-c-15ec2a5d-d51e-463b-8b47-42ad5658e317',
+      subscribeKey: 'sub-c-886f557a-0307-11eb-88da-261b8c980873'
+    });
+
+    pubnub.subscribe({channels: [pnChannel]});
+    pubnub.addListener({message:redraw});
+
+    setInterval(function() {
+      pubnub.publish({channel:pnChannel, message:{lat:window.lat + 0.001, lng:window.lng + 0.01}});
+    }, 2000);
+
+    
+
+    </script>
 {% endblock %}

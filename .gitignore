@@ -10,3 +10,4 @@ drman/static/images/
 drman/accounts/mission.csv
 drman/dev/__pycache__
 drman/dev/migrations
+drman/drman/settings.py
