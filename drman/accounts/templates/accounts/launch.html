@@ -94,7 +94,7 @@
 
         </div>
         <div class="card">
-            <div id='map' style='width: 500px; height: 500px;'></div>
+            <div id='map' style='width: 500px; height: 600px;'></div>
 
             <!-- <div class="card-body">
                 <h5 class="card-title">Mission Map</h5>
@@ -159,23 +159,37 @@
         mark.setLngLat([lng,lat]);
     }
 
-    mark = new mapboxgl.Marker()
-.setLngLat([55.387197,25.351222 ])
+
+var c1 = new mapboxgl.Marker()
+.setLngLat([parseFloat("{{mission.c12}}"),parseFloat("{{mission.c11}}") ])
 .addTo(map);
+
+var c1 = new mapboxgl.Marker()
+.setLngLat([parseFloat("{{mission.c22}}"),parseFloat("{{mission.c21}}") ])
+.addTo(map);
+
+var c1 = new mapboxgl.Marker()
+.setLngLat([parseFloat("{{mission.c32}}"),parseFloat("{{mission.c31}}") ])
+.addTo(map);
+
+var c1 = new mapboxgl.Marker()
+.setLngLat([parseFloat("{{mission.c42}}"),parseFloat("{{mission.c41}}") ])
+.addTo(map);
+
+
 
 
     var pnChannel = "{{mission.mission_id}}";
     var pubnub = new PubNub({
-      publishKey:   'pub-c-15ec2a5d-d51e-463b-8b47-42ad5658e317',
       subscribeKey: 'sub-c-886f557a-0307-11eb-88da-261b8c980873'
     });
 
     pubnub.subscribe({channels: [pnChannel]});
     pubnub.addListener({message:redraw});
 
-    setInterval(function() {
-      pubnub.publish({channel:pnChannel, message:{lat:window.lat + 0.001, lng:window.lng + 0.01}});
-    }, 2000);
+    // setInterval(function() {
+    //   pubnub.publish({channel:pnChannel, message:{lat:window.lat + 0.001, lng:window.lng + 0.01}});
+    // }, 2000);
 
     
 
