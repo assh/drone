@@ -11,8 +11,9 @@
         <th scope="col">Mission No</th>
         <th scope="col">Drone Station</th>
         <th scope="col">Drone Assigned</th>
-        <th scope="col">Mission Type</th>
         <th scope="col">Manager</th>
+        <th scope="col">Mission Type</th>
+        
         <th scope="col">Media Type</th>
         <th scope="col">Date</th>
         <th scope="col">Time</th>
@@ -29,7 +30,7 @@
         <td align="left"><a href="{% url 'launch' mission.id %}">{{mission.mission_id}}</a></td>
         <td align="left">{{mission.vds}}</td>
         <td align="left">{{mission.vda}}</td>
-
+        <td align="left">{{mission.vm}}</td>
         {% if mission.mission_type == '1' %}
         <td align="left">Loiter</td>
         {% elif mission.mission_type == '2' %}
@@ -39,7 +40,7 @@
         {% endif %}
 
 
-        <td align="left">{{mission.vm}}</td>
+        
 
 
         {% if mission.mode_type == '1' %}
